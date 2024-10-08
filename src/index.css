@@ -114,6 +114,18 @@ img{
 .base__white{
   background-color: #ffffff !important;
 }
+.base__lgray{
+  background-color: #EEEEEE !important;
+}
+.base__gray{
+  background-color: #D2D2D2 !important;
+}
+.base__dgray{
+  background-color: #727272 !important;
+}
+.base__black{
+  background-color: #000000 !important;
+}
 .base-shadow__gray{
   background-color: rgba(69, 69, 69, 0.3) !important;
 }
@@ -142,18 +154,6 @@ img{
   border: 2px solid #c0c0c0 !important;
 }
 
-.footer__lgray{
-  background-color: #EEEEEE !important;
-}
-.footer_gray{
-  background-color: #D2D2D2 !important;
-}
-.footer__dgray{
-  background-color: #727272 !important;
-}
-.base__black{
-  background-color: #000000 !important;
-}
 .fc__dblue{
   color: #3158e6 !important;
 }

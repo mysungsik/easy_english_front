@@ -1,0 +1,28 @@
+footer {
+    height: 150px;
+    margin-top: 100px;
+}
+footer .footer-bot{
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 120px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+footer .footer-bot .footer-bot-nav{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-bot .footer-bot-nav li{
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-bot .footer-bot-warn {
+    text-align: center;
+}
