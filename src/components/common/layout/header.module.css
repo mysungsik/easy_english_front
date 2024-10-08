@@ -1,0 +1,83 @@
+header {
+    position: relative;
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header .header-top{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .header-top .header-top-left{
+    display: flex;
+    align-items: center;
+}
+
+header .header-top .left-logo{
+    width: 80px;
+    margin-right: 10px;
+}
+
+header .header-top .left-nav ul{
+    display: flex;
+    gap: 10px;
+}
+
+/* 헤더 네비게이션 드롭다운*/
+header .header-bot{
+    position: absolute;
+    top: 100px;
+    height: 60px;
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    align-items: center;
+    padding-left: 100px;
+    
+}
+
+header .header-bot ul{
+    display: flex;
+    gap: 20px;
+}
+
+/* 헤더 로그인유저 드롭다운 START ---------*/
+.header-top .header-top-user .dropdown-menu{
+    transform: translate(-350px, 52.5px) !important;
+    inset: 0px auto auto 0px !important;
+    width: 430px;
+    border-radius: 15px;
+}
+
+.header-top .header-top-user .dropdown-menu .header-title{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.header-top .header-top-user .dropdown-menu > li{
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.header-top .header-top-user .dropdown-menu li:hover{
+    cursor: default;
+    background:none;
+}
+
+.dropdown-menu li:first-of-type > div{
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.dropdown-menu .logout{
+	text-align: right;
+	
+}
+/* 헤더 드롭다운 END ---------*/
