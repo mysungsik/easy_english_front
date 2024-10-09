@@ -28,7 +28,7 @@ const DashboardScore = () =>{
         <div className={`${style['dashboard-score']}`}>
             <div className={`${style['ranking-div']}`}>
                 <p className={`fs-14 mb-4`}> Easy Ranking </p>
-                <p className={`fs-20`}> 최고 점수에 도전하세요! </p>
+                <p className={`fs-24__b`}> 최고 점수에 도전하세요! </p>
             </div>
             <div className={`${style['scoreboard-div']}`}>
                 <div>
