@@ -20,7 +20,7 @@ const Header = () => {
     };
     return (
         <div className={`${style['header-background']}`}>
-            <header className={`${navId != "" ? style['show'] : style['hide']}`}>
+            <header className={`${navId !== "" ? style['show'] : style['hide']}`}>
                 {/* 헤더 상단 */}
                 <div className={`${style['header-top']} `}>
                     {/* 로고 및 네비게이션 파트 */}

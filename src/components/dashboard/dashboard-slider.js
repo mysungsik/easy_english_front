@@ -36,7 +36,7 @@ const DashboardMainSlider = () =>{
                             <Link to={"/learn/today"} className={`${style['ad-go']} btn-big__blue base_mblue`}> 학습하러가기 </Link>
                         </div>
                         <div className={`${style['ad-img-div']}`}>
-                            <img src='ads/study_large2.png'/>
+                            <img src='ads/study_large2.png' alt='image2'/>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -51,7 +51,7 @@ const DashboardMainSlider = () =>{
                             <Link to={"/game/hangman"} className={`${style['ad-go']} btn-big__dorange`}> 학습하러가기 </Link>
                         </div>
                         <div className={`${style['ad-img-div']}`}>
-                            <img src='ads/hangman.png'/>
+                            <img src='ads/hangman.png' alt='image2'/>
                         </div>
                     </div>
                 </SwiperSlide>
