@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-import style from './login-form.module.css'; // 스타일 파일 임포트
+import style from './login-form.module.css';
 import { useState } from 'react';
 
 const LoginForm = () => {
-
     const [showPassword, setShowPassword] = useState(false)
 
     const handlePasswordToggle = ()=>{
@@ -27,7 +26,7 @@ const LoginForm = () => {
                         }
                     </div>
                 </div>
-                <button className={`btn-big__blue loginBtn`}>
+                <button className={`btn-big__blue`}>
                     로그인
                 </button>
                 <div className={`${style['term-check-div']} checkbox__blue`}>
@@ -38,7 +37,7 @@ const LoginForm = () => {
                     <div>
                         <Link className={`fc__gray text-hover__gray`} to={`/findInfo/findId`}> 아이디 찾기 </Link>
                         |<Link className={`fc__gray text-hover__gray`} to={'/findInfo/findPw'}> 비밀번호 찾기</Link>
-                        |<Link className={`fc__gray text-hover__gray`} to={`/signup/signupTerms`}>회원가입 </Link>
+                        |<Link className={`fc__gray text-hover__gray`} to={`/signup`}>회원가입 </Link>
                     </div>
                     <img src={`/logo/logo_main.png`} alt="logo" />
                 </div>
