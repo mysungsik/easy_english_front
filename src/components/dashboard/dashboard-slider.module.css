@@ -1,0 +1,34 @@
+.dashboard-slider{
+    height: 400px;
+}
+
+.dashboard-slider .ads-slide{
+    height: 100%;
+}
+
+.ads-slide .ad-div{
+    display: flex;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.ads-slide .ad-div .ad-info-div{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.ads-slide .ad-div .ad-img-div{
+    height: 100%;
+    width: 60%;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.ads-slide .ad-div .ad-img-div img{
+    height: 400px;
+    padding: 30px;
+    border-radius: 500px;
+}

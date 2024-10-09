@@ -3,7 +3,7 @@ import style from "./footer.module.css"
 
 const Footer = () => {
     return (
-        <footer className={`${style['footer']} base__lgray`}>
+        <footer className={`${style['footer']} base__lblue`}>
             <div className={`${style['footer-bot']} d-flex`}>
                 <div className={`${style['footer-bot-nav']} d-flex`}>
                     <ul className={`d-flex`}>

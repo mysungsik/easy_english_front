@@ -1,0 +1,16 @@
+.dashboard-cards{
+    height: 300px;
+}
+
+.dashboard-cards .dashboard-cards-info{
+    text-align: center;
+    padding-top: 15px;
+}
+
+.dashboard-cards .dashboard-cards-main{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
