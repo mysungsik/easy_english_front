@@ -1,24 +1,32 @@
 .dashboard-score{
-    display: flex;
     width: 1024px;
     margin: 40px auto;
-    justify-content: center;
+    text-align: center;
+}
+
+.dashboard-score .ranking-div{
+    margin-bottom: 30px;
+}
+
+.dashboard-score .scoreboard-div{
+    display: flex;
+    width: 100%;
     gap: 10%;
 }
 
-.dashboard-score > div{
+.dashboard-score .scoreboard-div > div{
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.dashboard-score > div > table{
+.dashboard-score .scoreboard-div > div > table{
     border-spacing: 0px;
     width: 90%;
 }
 
-.dashboard-score > div > table td{
+.dashboard-score .scoreboard-div > div > table td{
     border: 1px solid rgba(33, 33, 82, 0.27);
     text-align: center;
 }
