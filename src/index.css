@@ -23,7 +23,6 @@ body * {
   font-optical-sizing: auto;
   font-size: 12px;
   font-weight: 300;
-
 }
 
 body,
@@ -49,12 +48,13 @@ img {
   height: 100%;
 }
 
+/* Pages ------------------------------------------------------------------------- */
 [class*='-page'] {
   width: 1024px;
   margin: 0 auto;
 }
 
-[class='dashboard-page'] {
+[class='dashboard-page']  {
   width: 100%;
 }
 
