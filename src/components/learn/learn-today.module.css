@@ -56,4 +56,35 @@
 /* 메인 ======================================= */
 .learntoday-main-section{
     width: 75%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+.learntoday-main-section .word-info-div,
+.learntoday-main-section .word-question-div,
+.learntoday-main-section .word-hint-div
+{
+    width: 100%;
+    padding: 0 20px;
+}
+
+.learntoday-main-section .word-info-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.learntoday-main-section .word-question-div{
+    width: 100%;
+    padding: 20px;
+    height: 60%;
+    margin-bottom: 20px;
+}
+
+.learntoday-main-section .word-hint-div{
+    justify-content: center;
+    gap: 20px;
+}
+
+

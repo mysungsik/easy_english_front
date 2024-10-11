@@ -3,7 +3,7 @@ import LearnTodaySide from "../../components/learn/learn-today-side"
 
 const LearnToday = () => {
     return (
-        <div className="learntoday-page">
+        <div className="learntoday-page d-flex">
             <LearnTodaySide/>
             <LearnTodayMain/>
         </div>
