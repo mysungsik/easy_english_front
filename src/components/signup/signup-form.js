@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import style from './signup-form.module.css';
+import axiosInstance from '../../config/axiosConfig';
+import {useNavigate} from "react-router-dom"
 import {idValidation, emailValidation, passwordValidation, nicknameValidation} from "../../util/valdation"
 
 const SignupForm = () =>{
     const [showPassword, setShowPassword] = useState(false)
+    const navigate = useNavigate()
 
     const [validation, setValidation] = useState({
         idValidate : false,
@@ -12,12 +15,12 @@ const SignupForm = () =>{
         nicknameValidate : false
     })
 
-    const [signupInfo, setSignupInfo] = useState({
-        signupId :"",
-        signupPw :"",
-        signupEmail :"",
-        signupNickname :"",
-    })
+const [signupInfo, setSignupInfo] = useState({
+    memberId :"",
+    memberPw :"",
+    memberEmail :"",
+    memberNickname :"",
+})
 
     const handlePasswordToggle = ()=>{
         setShowPassword(!showPassword)
@@ -33,53 +36,64 @@ const SignupForm = () =>{
     const handleValidation = () =>{
         setValidation(prevValidation => ({
                 ...prevValidation,
-                idValidate: idValidation(signupInfo.signupId),
-                pwValidate: passwordValidation(signupInfo.signupPw),
-                emailValidate: emailValidation(signupInfo.signupEmail),
-                nicknameValidate: nicknameValidation(signupInfo.signupNickname)
+                idValidate: idValidation(signupInfo.memberId),
+                pwValidate: passwordValidation(signupInfo.memberPw),
+                emailValidate: emailValidation(signupInfo.memberEmail),
+                nicknameValidate: nicknameValidation(signupInfo.memberNickname)
             })
         )
     }
     
     useEffect(()=>{handleValidation()},[signupInfo])
 
-    const signup = () =>{
-        
+const signup = async (e) =>{
+    e.preventDefault()
+
+    try {
+        const response = await axiosInstance.post("/signup", signupInfo)
+        console.log(response)
+        if(response > 0){
+            navigate("/login")
+        }
+    } catch (error) {
+        // 인터셉터에서 처리된 에러가 여기로 전달
+        console.log(error)
     }
+}
 
     return (
         <section className={`${style['signup-form-section']}`}>
         <p className={`${style['header-text']}`}> 회원가입 </p>
-            <form name="signupForm" className={`${style['signup-form']} base__lblue br-15 box-shadow`}  action="post">
+            <form name="signupForm" className={`${style['signup-form']} base__lblue br-15 box-shadow`}>
                 <p className={`fs-20__b`}> 회원 정보</p>
                 <div className={`${style['signup-essential']}`}>
                     <div>
                         <p className={`${style['signup-subtitle']}`}> 회원 아이디 </p>
-                        <input className={`box-shadow`} type="text" name="signupId" onChange={(e)=>handleUserInput(e)} placeholder="ID : *소문자를 포함 5~13 글자 / 대문자 및 숫자 사용가능" />
-                        {validation.idValidate === false && signupInfo.signupId !== ''  ? <p className={`${style['validate-fail']}`}>*아이디 형식이 올바르지 않습니다.</p> : ''}
+                        <input className={`box-shadow`} type="text" name="memberId" onChange={(e)=>handleUserInput(e)} placeholder="ID : *소문자를 포함 5~13 글자 / 대문자 및 숫자 사용가능" />
+                        {validation.idValidate === false && signupInfo.memberId !== ''  ? <p className={`${style['validate-fail']}`}>*아이디 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}> 패스워드 </p>
-                        <input className={`box-shadow`}  type={showPassword ? "text" : "password"} name="signupPw" onChange={(e)=>handleUserInput(e)} placeholder="PW : *최소 한개의 소문자, 대문자, 숫자를 포함 10~20 글자 / 특수문자 사용가능" />
+                        <input className={`box-shadow`}  type={showPassword ? "text" : "password"} name="memberPw" onChange={(e)=>handleUserInput(e)} placeholder="PW : *최소 한개의 소문자, 대문자, 숫자를 포함 10~20 글자 / 특수문자 사용가능" />
                         {showPassword ? 
                             <img className={`${style['password-eye']}`} src={`/icons/eye.png`} onClick={handlePasswordToggle} alt="password-eye" />
                             :                  
                             <img className={`${style['password-eye']}`} src={`/icons/eye-closed.png`} onClick={handlePasswordToggle} alt="password-eye" />
                         }
-                        {validation.pwValidate === false && signupInfo.signupPw !== '' ?  <p className={`${style['validate-fail']}`}> *비밀번호 형식이 올바르지 않습니다.</p> : ''}
+                        {validation.pwValidate === false && signupInfo.memberPw !== '' ?  <p className={`${style['validate-fail']}`}> *비밀번호 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}>이메일</p>
-                        <input className={`box-shadow`} type="text" name="signupEmail" onChange={(e)=>handleUserInput(e)}  placeholder="EMAIL : 이메일 형식" />
-                        {validation.emailValidate === false && signupInfo.signupEmail !== ''  ? <p className={`${style['validate-fail']}`}>*이메일 형식이 올바르지 않습니다.</p> : ''}
+                        <input className={`box-shadow`} type="text" name="memberEmail" onChange={(e)=>handleUserInput(e)}  placeholder="EMAIL : 이메일 형식" />
+                        {validation.emailValidate === false && signupInfo.memberEmail !== ''  ? <p className={`${style['validate-fail']}`}>*이메일 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}>닉네임</p>
-                        <input className={`box-shadow`} type="text" name="signupNickname" onChange={(e)=>handleUserInput(e)}  placeholder="NICKNAME : 20자 이내의 영어,한글" />
-                        {validation.nicknameValidate === false && signupInfo.signupNickname !== ''  ? <p className={`${style['validate-fail']}`}>*닉네임 형식이 올바르지 않습니다.</p> : ''}
+                        <input className={`box-shadow`} type="text" name="memberNickname" onChange={(e)=>handleUserInput(e)}  placeholder="NICKNAME : 20자 이내의 영어,한글" />
+                        {validation.nicknameValidate === false && signupInfo.memberNickname !== ''  ? <p className={`${style['validate-fail']}`}>*닉네임 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                 </div>
-	            <button className={`btn-big__blue `}>    
+	            <button className={`btn-big__blue `} type='button' onClick={signup}>    
 	                회원가입
 	            </button>
             </form>
