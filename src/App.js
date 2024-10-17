@@ -4,6 +4,7 @@ import Signup from "./pages/signup/signup"
 import Dashboard from "./pages/dashboard/dashboard"
 import LearnToday from './pages/learn/learn-today';
 import {jwtDecode} from "jwt-decode"
+import Adminpage from './pages/admin/adminpage';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='today' element={<LearnToday/>}></Route>
         </Route>
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/admin" element={<Adminpage/>} />
       </Routes>
     </div>
   );

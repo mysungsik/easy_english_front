@@ -5,7 +5,7 @@ import UserContext from "../../../context/userContext";
 
 const Header = () => {
     const [navId, setNavId] = useState("");
-    const {user} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
     const hideTimeout = useRef(null); // 타임아웃 저장
 
     const handleMouseEnter = (id) => {
@@ -20,6 +20,12 @@ const Header = () => {
             setNavId(""); 
         }, 400);
     };
+
+    const logout = () => {
+        localStorage.removeItem("jwt")
+        setUser({})
+    }
+
     return (
         <div className={`${style['header-background']}`}>
             <header className={`${navId !== "" ? style['show'] : style['hide']}`}>
@@ -43,7 +49,10 @@ const Header = () => {
                     </div>
                     {/* 유저 로그인 파트 */}
                     {Object.keys(user).length > 0 ?
-                        <p> 안녕하세요 {user.memberEmail}</p>
+                        <div>
+                            <p> 안녕하세요 {user.memberNickname}</p>
+                            <button onClick={logout}> 로그아웃 </button>
+                        </div>
                         :
                         <div className={`${style['header-top-right']}`}>
                             <Link to={"/login"} className={`btn-small__blue loginBtn`}> 로그인 </Link>

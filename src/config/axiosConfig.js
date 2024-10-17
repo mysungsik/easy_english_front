@@ -6,7 +6,7 @@ console.log(jwt == null)
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_DEV_SERVER,
-    timeout: 5000,
+    timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
         'Authorization' : jwt == null ? '' : `Bearer ${jwt}`
