@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
 import style from "./header.module.css"
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
+import UserContext from "../../../context/userContext";
 
 const Header = () => {
     const [navId, setNavId] = useState("");
+    const {user} = useContext(UserContext)
     const hideTimeout = useRef(null); // 타임아웃 저장
 
     const handleMouseEnter = (id) => {
@@ -40,9 +42,13 @@ const Header = () => {
                         </div>
                     </div>
                     {/* 유저 로그인 파트 */}
-                    <div className={`${style['header-top-right']}`}>
-                        <Link to={"/login"} className={`btn-small__blue loginBtn`}> 로그인 </Link>
-                    </div>
+                    {Object.keys(user).length > 0 ?
+                        <p> 안녕하세요 {user.memberEmail}</p>
+                        :
+                        <div className={`${style['header-top-right']}`}>
+                            <Link to={"/login"} className={`btn-small__blue loginBtn`}> 로그인 </Link>
+                        </div>
+                    }
                 </div>
                 {/* 헤더 하단 슬라이드 */}
                 <div

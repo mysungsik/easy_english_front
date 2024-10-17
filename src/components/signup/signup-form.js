@@ -56,8 +56,7 @@ const signup = async (e) =>{
             navigate("/login")
         }
     } catch (error) {
-        // 인터셉터에서 처리된 에러가 여기로 전달
-        console.log(error)
+        alert("회원가입에 실패하였습니다. 정보를 확인해주세요")
     }
 }
 

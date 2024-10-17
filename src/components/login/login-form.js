@@ -1,24 +1,62 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './login-form.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import axiosInstance from '../../config/axiosConfig';
+import UserContext from '../../context/userContext';
+import {jwtDecode} from "jwt-decode"
 
 const LoginForm = () => {
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
+    const {user, setUser} = useContext(UserContext)
+
+    const [loginInfo, setLoginInfo] = useState({
+        memberId : "",
+        memberPw : ""
+    });
+
+    const handleUserInput = (e) => {
+        setLoginInfo((prev) => {
+            const {value, name} = e.target;
+            return {
+                ...prev, 
+                [name] : value
+            }
+        })
+    }
 
     const handlePasswordToggle = ()=>{
         setShowPassword(!showPassword)
     }
 
+    const login = async (e) => {
+        e.preventDefault()
+
+        if (loginInfo.memberId.trim() === '' || loginInfo.memberPw.trim() === ''){
+            alert("로그인 정보를 입력해주세요")
+        }
+        try{
+            const response = await axiosInstance.post("/login", loginInfo)
+            localStorage.setItem("jwt", response)
+            const jwtValue = jwtDecode(response)
+            setUser(jwtValue)
+            navigate("/")
+        
+        }catch(error){
+            alert("로그인 정보가 잘못되었습니다.")
+        }
+    }
+
     return (
         <section className={`${style['login-form-section']}`}>
             <p className={`${style['header-text']}`}> 로그인 </p>
-            <form name="loginForm" className={`${style['login-form']} base__lblue br-15 box-shadow`} action="" method="post" >
+            <form name="loginForm" className={`${style['login-form']} base__lblue br-15 box-shadow`}>
                 <div className={`${style['login-essential']} mt-20`}>
                     <div>
-                        <input className={`box-shadow`} type="text" name="login_id" placeholder="아이디를 입력해주세요"/>
+                        <input className={`box-shadow`} type="text" name="memberId" placeholder="아이디를 입력해주세요" onChange={(e)=>{handleUserInput(e)}}/>
                     </div>
                     <div>
-                        <input className={`box-shadow`} type={showPassword ? "text" : "password"} name="login_pw" placeholder="패스워드를 입력해주세요"/>
+                        <input className={`box-shadow`} type={showPassword ? "text" : "password"} name="memberPw"  onChange={(e)=>{handleUserInput(e)}} placeholder="패스워드를 입력해주세요"/>
                         {showPassword ? 
                             <img className={`${style['password-eye']}`} src={`/icons/eye.png`} onClick={handlePasswordToggle} alt="password-eye" />
                             :                  
@@ -26,7 +64,7 @@ const LoginForm = () => {
                         }
                     </div>
                 </div>
-                <button className={`btn-big__blue`}>
+                <button className={`btn-big__blue`}  onClick={login}>
                     로그인
                 </button>
                 <div className={`${style['term-check-div']} checkbox__blue`}>

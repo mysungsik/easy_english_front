@@ -37,29 +37,33 @@ const DashboardScore = () =>{
                     </div>
                     <table>
                         <thead className={`base__blue`}>
-                            <td  className={`fc__white`}>
-                                닉네임
-                            </td>
-                            <td  className={`fc__white`}>
-                                날짜
-                            </td>
-                            <td  className={`fc__white`}>
-                                점수
-                            </td>
-                        </thead>
-                        {hangmanScore.map((item)=>(
                             <tr>
-                                <td>
-                                    {item.nickname}
-                                </td>
-                                <td>
-                                    {item.date}
-                                </td>
-                                <td>
-                                    {item.score}
-                                </td>
+                                <th  className={`fc__white`}>
+                                    닉네임
+                                </th>
+                                <th  className={`fc__white`}>
+                                    날짜
+                                </th>
+                                <th  className={`fc__white`}>
+                                    점수
+                                </th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                            {hangmanScore.map((item)=>(
+                                <tr key={item.nickname}>
+                                    <td>
+                                        {item.nickname}
+                                    </td>
+                                    <td>
+                                        {item.date}
+                                    </td>
+                                    <td>
+                                        {item.score}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
                 <div>
@@ -68,32 +72,35 @@ const DashboardScore = () =>{
                     </div>
                     <table>
                         <thead className={`base__blue`}>
-                            <td  className={`fc__white`}>
-                                닉네임
-                            </td>
-                            <td  className={`fc__white`}>
-                                날짜
-                            </td>
-                            <td  className={`fc__white`}>
-                                새로배운 단어
-                            </td>
-                        </thead>
-                        {studyScore.map((item)=>(
                             <tr>
-                                <td>
-                                    {item.nickname}
-                                </td>
-                                <td>
-                                    {item.date}
-                                </td>
-                                <td>
-                                    {item.score}
-                                </td>
+                                <th  className={`fc__white`}>
+                                    닉네임
+                                </th>
+                                <th  className={`fc__white`}>
+                                    날짜
+                                </th>
+                                <th  className={`fc__white`}>
+                                새로배운 단어
+                                </th>
                             </tr>
-                        ))}
+                        </thead>
+                        <tbody>
+                            {studyScore.map((item)=>(
+                                <tr key={item.nickname}>
+                                    <td>
+                                        {item.nickname}
+                                    </td>
+                                    <td>
+                                        {item.date}
+                                    </td>
+                                    <td>
+                                        {item.score}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     )
