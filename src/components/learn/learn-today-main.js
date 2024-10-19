@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import style from "./learn-today.module.css"
 
+
 const LearnTodayMain = () =>{
 
     const [question, setQuestion] = useState({})
@@ -14,7 +15,7 @@ const LearnTodayMain = () =>{
             example_answer: '반지를 빼고 손을 씻고 나서 다시 끼는 것을 깜빡했어'
         })
     },[])
-    
+
     // 힌트생성
     const showHint = ()=>{
         if (hintLevel < 1 ){
@@ -30,8 +31,8 @@ const LearnTodayMain = () =>{
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = question.example;
         utterance.lang = 'en-US'; // 언어 설정 (미국 영어)
-        utterance.rate = 0.8; // 속도 설정 (1이 기본)
-        utterance.pitch = 1.1; // 음높이 설정 (1이 기본)
+        utterance.rate = 1.0; // 속도 설정 (1이 기본)
+        utterance.pitch = 1.0; // 음높이 설정 (1이 기본)
         speechSynthesis.speak(utterance);
     }
     
@@ -57,20 +58,20 @@ const LearnTodayMain = () =>{
                     {question.example_answer}
                 </p>
                 <p>
-                    {('word' in question) ? question.example.split(' ').map(word => {
+                    {('word' in question) ? question.example.split(' ').map((word, index) => {
                         // 띄어쓰기로 분류 후 match 
                         // new RegExp('값', [옵션]) -> 'i' 는 대소문자 구별하지않음 옵션
                         const match = word.match(new RegExp(question.word, 'i'));
                         return (
-                            <>
+                            <span key={index}>
                                 {match ? (
                                     // match 되면 input 아니라면 기본 word 표시
                                     <input type="text" style={{ width: getInputWidth(question.word.length) }}/>
                                 ) : (
-                                    word
+                                    <span>{word}</span>
                                 )}
                                 {' '}
-                            </>
+                            </span>
                         );
                     }) : ''}
                 </p>

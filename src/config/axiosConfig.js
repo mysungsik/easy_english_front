@@ -2,7 +2,6 @@ import axios from "axios";
 
 // 1. 기본 요청 생성
 const jwt = localStorage.getItem("jwt")
-console.log(jwt == null)
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_DEV_SERVER,

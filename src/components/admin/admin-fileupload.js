@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 
-
-
 const AdminFileUpload = () =>{
     const [file, setFile] = useState(null);
 

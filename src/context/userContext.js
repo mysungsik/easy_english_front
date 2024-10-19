@@ -5,13 +5,7 @@ const UserContext = createContext()
 const jwt = localStorage.getItem("jwt")
 
 export const UserContextProvider = ({children})=>{
-    const [user, setUser] = useState({})
-
-    useEffect(()=>{
-        if (jwt != null){
-            setUser({...jwtDecode(jwt)})
-        }
-    },[])
+    const [user, setUser] = useState( jwt != null ? {...jwtDecode(jwt)} : {})
 
     return (
         <UserContext.Provider value={{user, setUser}}>
