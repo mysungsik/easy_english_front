@@ -80,6 +80,10 @@
     padding: 20px;
     height: 60%;
     margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .learntoday-main-section .word-hint-div{
@@ -87,4 +91,14 @@
     gap: 20px;
 }
 
+/* 문제 입력창 */
+.questionInput{
+    background-color: white !important;
+    color: black !important;
+}
 
+/* 정답 입력창 */
+.answerInput{
+    width: 120px;
+    text-align: center;
+}
