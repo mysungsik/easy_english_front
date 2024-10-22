@@ -40,7 +40,9 @@ axiosInstance.interceptors.response.use(
             console.error('Response error:', error.response);
 
             if (error.response.status === 401) {  // 특정 오류 처리
-                console.log('auth Error');
+                alert("세션이 만료되었습니다.")
+                localStorage.removeItem("jwt")
+                window.location.replace("/")
             }
 
         } else if (error.request) { // 요청은 보내졌지만 응답이 없는 경우
