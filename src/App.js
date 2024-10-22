@@ -4,8 +4,13 @@ import Signup from "./pages/signup/signup"
 import Dashboard from "./pages/dashboard/dashboard"
 import LearnToday from './pages/learn/learn-today';
 import Adminpage from './pages/admin/adminpage';
+import { useContext } from 'react';
+import UserContext from './context/userContext';
+
 
 function App() {  
+  const {user} = useContext(UserContext);
+
   return (
     <div className="App">
       <Routes>
@@ -13,7 +18,7 @@ function App() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
         <Route path="/learn/*">
-          <Route path='today' element={<LearnToday/>}></Route>
+          <Route path='today' element={<LearnToday user={user}/>}></Route>
         </Route>
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/admin" element={<Adminpage/>} />

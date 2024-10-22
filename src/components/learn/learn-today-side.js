@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./learn-today.module.css"
 import { useNavigate } from "react-router-dom";
-import UserContext from "../../context/userContext";
 
-const LearnTodaySide = () =>{
+const LearnTodaySide = ({user}) =>{
     const navigate = useNavigate()
-    const {user} = useContext(UserContext)
     
     const [time, setTime] = useState(0)
     const [timer, setTimer] = useState()

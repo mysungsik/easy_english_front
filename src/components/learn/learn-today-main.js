@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useLayoutEffect, useState } from "react"
 import style from "./learn-today.module.css"
 import axiosInstance from "../../config/axiosConfig"
 import UserContext from "../../context/userContext"
 
 
-const LearnTodayMain = () =>{
+const LearnTodayMain = ({user}) =>{
     const [question, setQuestion] = useState({})
     const [hintLevel, setHintLevel] = useState(0)
-    const {user} = useContext(UserContext)
     const [answer, setAnswer] = useState("")
     const [loading, setLoading] = useState(false)
 
-    console.log(loading)
-
     useEffect(()=>{
-        getWord(false)
+        // 로그인유저가 존재할때 데이터 가져오기
+        if(Object.keys(user).length > 0){
+            getWord(false)
+        }
     },[])
 
     useEffect(()=>{

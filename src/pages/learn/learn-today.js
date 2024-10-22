@@ -1,25 +1,24 @@
-import { useContext } from "react";
+import { useLayoutEffect } from "react";
 import LearnTodayMain from "../../components/learn/learn-today-main"
 import LearnTodaySide from "../../components/learn/learn-today-side"
-import UserContext from "../../context/userContext";
 import { useNavigate } from "react-router-dom"
 
-
-const LearnToday = () => {
+const LearnToday = ({user}) => {
     const navigate = useNavigate();
-    const {user} = useContext(UserContext);
-    
-    if(!Object.keys(user).length > 0){
-        alert("로그인 후 이용해주세요")
-        navigate("/login")
-    }
+
+    // useLayoutEffect 를 통해 화면 깜빡임 제거
+    useLayoutEffect(()=>{
+        if(!Object.keys(user).length > 0){
+            alert("로그인 후 이용해주세요")
+            navigate("/login", {replace:true})
+        }
+    },[user])
 
     return (
         <div className="learntoday-page d-flex">
-            <LearnTodaySide/>
-            <LearnTodayMain/>
+            <LearnTodaySide user={user}/>
+            <LearnTodayMain user={user}/>
         </div>
-
     )
 }
 export default LearnToday
