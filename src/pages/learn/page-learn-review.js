@@ -37,7 +37,7 @@ const PageLearnReview = ({user}) => {
     return (
         <div className="learntoday-page d-flex">
             <LearnSide user={user}/>
-            <LearnMain question={review} loading={loading} getWord={getWord} title={"단어 복습"}/>
+            <LearnMain user={user} question={review} loading={loading} getWord={getWord} title={"단어 복습"}/>
         </div>
     )
 }

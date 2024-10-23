@@ -15,7 +15,7 @@ const PageLearnToday = ({user}) => {
             alert("로그인 후 이용해주세요")
             navigate("/login", {replace:true})
         }else{
-            getWord(false) 
+            getWord(false)
         }
     },[user])
 
@@ -52,7 +52,13 @@ const PageLearnToday = ({user}) => {
     return (
         <div className="learntoday-page d-flex">
             <LearnSide user={user}/>
-            <LearnMain user={user} question={question} loading={loading} getWord={getWord} title={"오늘의 학습"}/>
+            <LearnMain  
+                user={user} 
+                question={question} 
+                loading={loading} 
+                getWord={getWord} 
+                title={"오늘의 학습"}
+            />
         </div>
     )
 }

@@ -1,10 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import style from "./learn-today.module.css"
 import axiosInstance from "../../config/axiosConfig"
 
 const LearnMain = ({user, question, loading, getWord, title}) =>{
     const [hintLevel, setHintLevel] = useState(0)
+    const [saved, setSaved] = useState(false)
     const [answer, setAnswer] = useState("")
+
+    useLayoutEffect(()=>{
+        // 단어장 저장 유무 확인
+        if( Object.keys(user).length > 0 && (question.hasOwnProperty("wordId")) ){
+            console.log("aaa")
+            getWordFromRepeatNote(user.memberNo, question.wordId)
+        }
+    },[question])
 
     useEffect(()=>{
         showHint()
@@ -66,21 +75,44 @@ const LearnMain = ({user, question, loading, getWord, title}) =>{
         setHintLevel(0)
     }
 
+    // 단어장 저장 유무 확인
+    const getWordFromRepeatNote = async (memberNo, wordId) =>{
+        const response = await axiosInstance.get(`/learn/checkWordFromRepeatNote?memberNo=${memberNo}&wordId=${wordId}`)
+
+        console.log(response.data)
+        if (response.data >= 1){
+            setSaved(true)
+        }else if (response.data == 0 || response.data !== null || response.data === ""){
+            setSaved(false)
+        }
+    }
+
     // 단어장 저장
-    const saveWord = async () =>{
+    const saveWordToRepeatNote = async () =>{
+        const response = await axiosInstance.post("/learn/saveToRepatNote", {
+            memberNo : user.memberNo,
+            wordId : question.wordId
+        })
 
-        try{
-            const result = await axiosInstance.post("/learn/saveToRepatNote", {
-                memberNo : user.memberNo,
-                wordId : question.wordId
-            })
-
-            alert(result)
-        }
-        catch(e){
-            alert("단어 저장에 실패하였습니다!")
+        if ( Object.keys(response.data).length > 0){
+            setSaved(true)
+        }else{
+            setSaved(false)
         }
 
+        alert(response.message)
+    }
+
+    // 단어장 삭제
+    const deleteWordToRepeatNote = async () =>{
+        const response = await axiosInstance.delete(`/learn/deleteWordFromRepatNote?memberNo=${user.memberNo}&wordId=${question.wordId}`)
+
+        if (response.data >= 1){
+            setSaved(false)
+        }else if (response.data == 0 || response.data !== null || response.data === ""){
+            setSaved(true)
+        }
+        alert(response.message)
     }
 
     return (
@@ -90,7 +122,11 @@ const LearnMain = ({user, question, loading, getWord, title}) =>{
             <div className={`d-flex ${style['word-info-div']}`}>
                 <div className={`d-flex`}>
                     <p>레벨 {question.wordId}</p>
-                    <button onClick={saveWord}> 단어 저장</button>
+                    {saved ? 
+                    <button onClick={deleteWordToRepeatNote}> 단어장 빼기</button>
+                    :
+                    <button onClick={saveWordToRepeatNote}> 단어장 넣기</button>}
+                    
                 </div>
                 <div>
                     <button> 예문신고 </button>
@@ -105,7 +141,7 @@ const LearnMain = ({user, question, loading, getWord, title}) =>{
                         {('wordSpell' in question) ? question.exampleSentence.split(' ').map((word, index) => {
                             // 띄어쓰기로 분류 후 match 
                             // new RegExp('값', [옵션]) -> 'i' 는 대소문자 구별하지않음 옵션
-                            const match = word.match(new RegExp(question.wordSpell, 'i'));
+                            const match = word.match(new RegExp(`^${question.wordSpell}$`, 'i'));
                             return (
                                 <span key={index}>
                                     {match ? (
