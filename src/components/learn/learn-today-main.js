@@ -36,7 +36,7 @@ const LearnTodayMain = ({user}) =>{
 
             if (response === ""){
                 alert("오늘의 할당량이 끝났습니다");
-                navigate("/")
+                window.location.replace("/")
             }else{
                 setQuestion(response)
             }
@@ -45,7 +45,13 @@ const LearnTodayMain = ({user}) =>{
         // 정답 제출시 다음 데이터 가져오기
         if (isCorrect){
             const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}&currentWordId=${question.wordId}`)
-            setQuestion(response)
+
+            if (response === ""){
+                alert("오늘의 할당량이 끝났습니다");
+                window.location.replace("/")
+            }else{
+                setQuestion(response)
+            }
         }
     }
 
