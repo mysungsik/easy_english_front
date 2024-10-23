@@ -15,7 +15,7 @@ const PageLearnReview = ({user}) => {
             alert("로그인 후 이용해주세요")
             navigate("/login", {replace:true})
         }else{
-            getWord() 
+            getWord()
         }
     },[user])
 
@@ -23,13 +23,12 @@ const PageLearnReview = ({user}) => {
     const getWord = async (sendAnswer) =>{
         setLoading(true)
   
-        const response = await axiosInstance.get(`/learn/getRandomWordForRepeatByMember?memberNo=${user.memberNo}`);
-
-        if (response === ""){
+        const response = await axiosInstance.get(`/learn/getRandomWordForReviewByMember?memberNo=${user.memberNo}`);
+        if (response.data === "" || response.data === null){
             alert("오늘의 할당량이 끝났습니다");
             window.location.replace("/")
         }else{
-            setReview(response)
+            setReview(response.data)
             setLoading(false)
         }
    

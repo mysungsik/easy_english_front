@@ -26,11 +26,11 @@ const PageLearnToday = ({user}) => {
         if (!sendAnswer){
             const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}`);
 
-            if (response === ""){
+            if (response.data === "" || response.data === null){
                 alert("오늘의 할당량이 끝났습니다");
                 window.location.replace("/")
             }else{
-                setQuestion(response)
+                setQuestion(response.data)
                 setLoading(false)
             }
         }
@@ -39,11 +39,11 @@ const PageLearnToday = ({user}) => {
         if (sendAnswer){
             const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}&currentWordId=${question.wordId}`)
 
-            if (response === ""){
+            if (response.data === "" || response.data === null){
                 alert("오늘의 할당량이 끝났습니다");
                 window.location.replace("/")
             }else{
-                setQuestion(response)
+                setQuestion(response.data)
                 setLoading(false)
             }
         }
@@ -52,7 +52,7 @@ const PageLearnToday = ({user}) => {
     return (
         <div className="learntoday-page d-flex">
             <LearnSide user={user}/>
-            <LearnMain question={question} loading={loading} getWord={getWord} title={"오늘의 학습"}/>
+            <LearnMain user={user} question={question} loading={loading} getWord={getWord} title={"오늘의 학습"}/>
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import style from "./learn-today.module.css"
+import axiosInstance from "../../config/axiosConfig"
 
-const LearnMain = ({question, loading, getWord, title}) =>{
+const LearnMain = ({user, question, loading, getWord, title}) =>{
     const [hintLevel, setHintLevel] = useState(0)
     const [answer, setAnswer] = useState("")
 
@@ -14,11 +15,12 @@ const LearnMain = ({question, loading, getWord, title}) =>{
         return wordLength * 12 + 'px'; // 1글자당 10px로 가정
     };
 
-    // 힌트생성
+    // 힌트 조작 핸들러
     const handleHintCnt = ()=>{
         hintLevel < 2 ? setHintLevel(hintLevel + 1) : setHintLevel(0)
     }
 
+    // 힌트 확인
     const showHint = () =>{
         if (hintLevel === 0){
             setAnswer("")
@@ -58,9 +60,27 @@ const LearnMain = ({question, loading, getWord, title}) =>{
         }
     }
 
+    // 입력 리셋
     const resetInput = () =>{
         setAnswer("")
         setHintLevel(0)
+    }
+
+    // 단어장 저장
+    const saveWord = async () =>{
+
+        try{
+            const result = await axiosInstance.post("/learn/saveToRepatNote", {
+                memberNo : user.memberNo,
+                wordId : question.wordId
+            })
+
+            alert(result)
+        }
+        catch(e){
+            alert("단어 저장에 실패하였습니다!")
+        }
+
     }
 
     return (
@@ -70,7 +90,7 @@ const LearnMain = ({question, loading, getWord, title}) =>{
             <div className={`d-flex ${style['word-info-div']}`}>
                 <div className={`d-flex`}>
                     <p>레벨 {question.wordId}</p>
-                    <button> 단어 저장</button>
+                    <button onClick={saveWord}> 단어 저장</button>
                 </div>
                 <div>
                     <button> 예문신고 </button>

@@ -45,6 +45,11 @@ axiosInstance.interceptors.response.use(
                 window.location.replace("/")
             }
 
+            if (error.response.status === 400) {  // 특정 오류 처리
+                alert(error.response.data.message)
+                return Promise.resolve(error.response.data)  // 400 에러는 Promise.reject 가 아닌 resolve 로 다음으로 넘김
+            }
+
         } else if (error.request) { // 요청은 보내졌지만 응답이 없는 경우
             console.error('No response received:', error.request);
 
