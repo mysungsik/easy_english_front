@@ -1,60 +1,13 @@
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import style from "./learn-today.module.css"
-import axiosInstance from "../../config/axiosConfig"
-import {useNavigate} from "react-router-dom"
 
-
-const LearnTodayMain = ({user}) =>{
-    const [question, setQuestion] = useState({})
+const LearnTodayMain = ({question, loading, getWord}) =>{
     const [hintLevel, setHintLevel] = useState(0)
     const [answer, setAnswer] = useState("")
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
-
-    useLayoutEffect(()=>{
-        // 로그인유저가 존재할때 데이터 가져오기
-        if(Object.keys(user).length > 0){
-            getWord(false)
-        }
-    },[])
 
     useEffect(()=>{
         showHint()
     },[hintLevel])
-
-    // 데이터가져왔으면 Loading 상태 종료
-    useEffect(()=>{
-        setLoading(false)
-    },[question])
-
-    // 데이터 가져오기
-    const getWord = async (isCorrect) =>{
-        setLoading(true)
-        // 초기 데이터 가져오기
-        if (!isCorrect){
-            const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}`);
-
-            if (response === ""){
-                alert("오늘의 할당량이 끝났습니다");
-                window.location.replace("/")
-            }else{
-                setQuestion(response)
-            }
-        }
-
-        // 정답 제출시 다음 데이터 가져오기
-        if (isCorrect){
-            const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}&currentWordId=${question.wordId}`)
-
-            if (response === ""){
-                alert("오늘의 할당량이 끝났습니다");
-                window.location.replace("/")
-            }else{
-                setQuestion(response)
-            }
-        }
-    }
-
     
     // word의 길이에 따른 input 너비 계산 함수
     const getInputWidth = (wordLength) => {
