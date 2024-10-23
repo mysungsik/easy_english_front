@@ -1,10 +1,10 @@
 import LoginForm from "../../components/login/login-form"
 
-const Login = () => {
+const PageLogin = () => {
     return (
         <div className="login-page">
             <LoginForm/>
         </div>
     )
 }
-export default Login
+export default PageLogin

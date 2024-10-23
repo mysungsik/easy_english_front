@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./learn-today.module.css"
 import { useNavigate } from "react-router-dom";
 
-const LearnTodaySide = ({user}) =>{
+const LearnSide = ({user}) =>{
     const navigate = useNavigate()
     
     const [time, setTime] = useState(0)
@@ -62,4 +62,4 @@ const LearnTodaySide = ({user}) =>{
 
 }
 
-export default LearnTodaySide;
+export default LearnSide;

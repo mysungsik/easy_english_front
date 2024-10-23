@@ -1,10 +1,10 @@
 import { useLayoutEffect, useState } from "react";
-import LearnTodayMain from "../../components/learn/learn-today-main"
-import LearnTodaySide from "../../components/learn/learn-today-side"
+import LearnMain from "../../components/learn/learn-main"
+import LearnSide from "../../components/learn/learn-side"
 import { useNavigate } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 
-const LearnToday = ({user}) => {
+const PageLearnToday = ({user}) => {
     const [question, setQuestion] = useState({})
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
@@ -49,13 +49,11 @@ const LearnToday = ({user}) => {
         }
     }
 
-
-
     return (
         <div className="learntoday-page d-flex">
-            <LearnTodaySide user={user}/>
-            <LearnTodayMain question={question} loading={loading} getWord={getWord}/>
+            <LearnSide user={user}/>
+            <LearnMain question={question} loading={loading} getWord={getWord}/>
         </div>
     )
 }
-export default LearnToday
+export default PageLearnToday

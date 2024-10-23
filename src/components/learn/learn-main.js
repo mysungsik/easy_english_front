@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import style from "./learn-today.module.css"
 
-const LearnTodayMain = ({question, loading, getWord}) =>{
+const LearnMain = ({question, loading, getWord}) =>{
     const [hintLevel, setHintLevel] = useState(0)
     const [answer, setAnswer] = useState("")
 
@@ -65,6 +65,7 @@ const LearnTodayMain = ({question, loading, getWord}) =>{
 
     return (
         <section className={`${style['learntoday-main-section']}`}>
+            <h1 className={`fs-20`}> 오늘의 학습 </h1>
             {loading && <div> 다음 문장 생성중... </div>}
             <div className={`d-flex ${style['word-info-div']}`}>
                 <div className={`d-flex`}>
@@ -118,4 +119,4 @@ const LearnTodayMain = ({question, loading, getWord}) =>{
     )
 }
 
-export default LearnTodayMain;
+export default LearnMain;

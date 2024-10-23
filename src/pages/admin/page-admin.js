@@ -1,6 +1,6 @@
 import AdminFileUpload from "../../components/admin/admin-fileupload";
 
-const Adminpage = () =>{
+const PageAdmin = () =>{
     return (
         <div className="admin-page">
             <AdminFileUpload/>
@@ -8,4 +8,4 @@ const Adminpage = () =>{
     )
 }
 
-export default Adminpage;
+export default PageAdmin;
