@@ -52,7 +52,7 @@ const PageLearnToday = ({user}) => {
     return (
         <div className="learntoday-page d-flex">
             <LearnSide user={user}/>
-            <LearnMain question={question} loading={loading} getWord={getWord}/>
+            <LearnMain question={question} loading={loading} getWord={getWord} title={"오늘의 학습"}/>
         </div>
     )
 }
