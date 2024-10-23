@@ -1,7 +1,7 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import style from "./learn-today.module.css"
 import axiosInstance from "../../config/axiosConfig"
-import UserContext from "../../context/userContext"
+import {useNavigate} from "react-router-dom"
 
 
 const LearnTodayMain = ({user}) =>{
@@ -9,8 +9,9 @@ const LearnTodayMain = ({user}) =>{
     const [hintLevel, setHintLevel] = useState(0)
     const [answer, setAnswer] = useState("")
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         // 로그인유저가 존재할때 데이터 가져오기
         if(Object.keys(user).length > 0){
             getWord(false)
@@ -31,8 +32,14 @@ const LearnTodayMain = ({user}) =>{
         setLoading(true)
         // 초기 데이터 가져오기
         if (!isCorrect){
-            const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}`)
+            const response = await axiosInstance.get(`/learn/getCurrentWordForMemeber?memberNo=${user.memberNo}`);
+
+            if (response === ""){
+                alert("오늘의 할당량이 끝났습니다");
+                navigate("/")
+            }else{
                 setQuestion(response)
+            }
         }
 
         // 정답 제출시 다음 데이터 가져오기
