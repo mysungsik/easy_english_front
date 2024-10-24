@@ -81,7 +81,10 @@ const Header = () => {
                     {navId === "game" && (
                         <ul>
                             <li>
-                                <Link to={"/game/hangman"} className="fc__white"> 행맨게임 </Link>
+                                <Link to={"/game/ufo"} className="fc__white"> UFO 게임 </Link>
+                            </li>
+                            <li>
+                                <Link to={"/game/rain"} className="fc__white"> 글자 비 </Link>
                             </li>
                         </ul>
                     )}

@@ -9,8 +9,8 @@ import PageDashboard from "./pages/dashboard/page-dashboard"
 import PageLearnToday from './pages/learn/page-learn-today';
 import PageLearnReview from './pages/learn/page-learn-review';
 import PageRepeatNote from './pages/repeat/page-repeat-note';
-import FallingWordsGame from './pages/game/page-rain-game';
-import WordGuessingGame from './pages/game/page-hangmain-game';
+import PageUFOGame from './pages/game/page-ufo-game';
+import PageWordRain from './pages/game/page-rain-game'
 
 
 
@@ -29,8 +29,8 @@ function App() {
             <Route path='repeatNote' element={<PageRepeatNote user={user}/>}></Route>
         </Route>
         <Route path='/game/*'>
-            <Route path='rain' element={<FallingWordsGame/>}></Route>
-            <Route path='hangman' element={<WordGuessingGame/>}></Route>
+            <Route path='rain' element={<PageWordRain/>}></Route>
+            <Route path='ufo' element={<PageUFOGame/>}></Route>
         </Route>
         <Route path="/dashboard" element={<PageDashboard/>} />
         <Route path="/admin" element={<PageAdmin/>} />
