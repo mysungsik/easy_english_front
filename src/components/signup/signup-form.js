@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import style from './signup-form.module.css';
 import axiosInstance from '../../config/axiosConfig';
 import {useNavigate} from "react-router-dom"
-import {idValidation, emailValidation, passwordValidation, nicknameValidation} from "../../util/valdation"
+import {idValidation, emailValidation, passwordValidation, nicknameValidation} from "../../util/validation"
 
 const SignupForm = () =>{
     const [showPassword, setShowPassword] = useState(false)

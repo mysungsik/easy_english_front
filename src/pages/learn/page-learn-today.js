@@ -1,7 +1,8 @@
 import { useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
+
 import LearnMain from "../../components/learn/learn-main"
 import LearnSide from "../../components/learn/learn-side"
-import { useNavigate } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 
 const PageLearnToday = ({user}) => {

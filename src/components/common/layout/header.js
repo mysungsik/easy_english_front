@@ -74,7 +74,7 @@ const Header = () => {
                                 <Link to={"/learn/review"} className="fc__white"> 복습 </Link>
                             </li>
                             <li>
-                                <Link to={"/learn/wordbook"} className="fc__white"> 나의 단어장 </Link>
+                                <Link to={"/learn/repeatNote"} className="fc__white"> 나의 단어장 </Link>
                             </li>
                         </ul>
                     )}

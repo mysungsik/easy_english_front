@@ -7,6 +7,8 @@
     font-style: normal;
 }	
  */
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
+
 @font-face {
   font-family: 'GongGothicMedium';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
@@ -46,16 +48,6 @@ ul {
 img {
   width: 100%;
   height: 100%;
-}
-
-/* Pages ------------------------------------------------------------------------- */
-[class*='-page'] {
-  width: 1024px;
-  margin: 0 auto;
-}
-
-[class='dashboard-page']  {
-  width: 100%;
 }
 
 /* Util ------------------------------------------------------------------------- */
@@ -887,6 +879,7 @@ img {
   cursor: pointer;
 }
 
+/* 기타 속성*/
 .pointer:hover {
   cursor: pointer;
 }

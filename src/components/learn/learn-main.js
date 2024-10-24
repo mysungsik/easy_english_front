@@ -169,7 +169,7 @@ const LearnMain = ({user, question, loading, getWord, title}) =>{
                 {hintLevel == 1 && <button onClick={()=>handleHintCnt()}>정답보기</button>}
                 {hintLevel == 2 && <button onClick={()=>handleHintCnt()}>다시풀어보기</button>}
                 
-                <button onClick={()=>speechHint()}> 음성힌트 </button>
+                <button onClick={speechHint}> 음성힌트 </button>
             </div>
         </section>
     )

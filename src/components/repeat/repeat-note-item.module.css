@@ -1,0 +1,69 @@
+/* 메인 ===================================== */
+.repeat-note-item{
+    width: 75%;
+    max-width: 720px;
+    margin: 3px auto;
+    border : 1px solid black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.repeat-note-item p {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.repeat-note-item .word-info-div{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.repeat-note-item .word-info-div .word-spell{
+    font-size: 24px;
+}
+.repeat-note-item .word-info-div .word-mean {
+    height: 100%;
+    font-size: 16px;
+}
+
+.repeat-note-item .word-example-mean-div {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px 0;
+}
+
+.repeat-note-item .word-example-sentence-div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
+}
+
+.repeat-note-item .word-example-sentence-div .word-example-sentence{
+    width: 100%;
+    height: 100%;
+    padding: 5px 0;
+}
+
+.hide{
+    background-color: black;
+    color: black;
+    transition: all ease-in-out 0.3s;
+}
+
+.show{
+    background-color: white;
+    transition: all ease-in-out 0.3s;
+}
