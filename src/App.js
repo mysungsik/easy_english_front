@@ -9,6 +9,8 @@ import PageDashboard from "./pages/dashboard/page-dashboard"
 import PageLearnToday from './pages/learn/page-learn-today';
 import PageLearnReview from './pages/learn/page-learn-review';
 import PageRepeatNote from './pages/repeat/page-repeat-note';
+import FallingWordsGame from './pages/game/page-rain-game';
+import WordGuessingGame from './pages/game/page-hangmain-game';
 
 
 
@@ -22,9 +24,13 @@ function App() {
         <Route path="/login" element={<PageLogin/>}></Route>
         <Route path="/signup" element={<PageSignup/>}></Route>
         <Route path="/learn/*">
-          <Route path='today' element={<PageLearnToday user={user}/>}></Route>
-          <Route path='review' element={<PageLearnReview user={user}/>}></Route>
-          <Route path='repeatNote' element={<PageRepeatNote user={user}/>}></Route>
+            <Route path='today' element={<PageLearnToday user={user}/>}></Route>
+            <Route path='review' element={<PageLearnReview user={user}/>}></Route>
+            <Route path='repeatNote' element={<PageRepeatNote user={user}/>}></Route>
+        </Route>
+        <Route path='/game/*'>
+            <Route path='rain' element={<FallingWordsGame/>}></Route>
+            <Route path='hangman' element={<WordGuessingGame/>}></Route>
         </Route>
         <Route path="/dashboard" element={<PageDashboard/>} />
         <Route path="/admin" element={<PageAdmin/>} />
