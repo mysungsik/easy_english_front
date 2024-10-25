@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import style from "./game-ufo-main.module.css"; // Assuming you're using CSS modules
+import axiosInstance from "../../config/axiosConfig";
 
 
 // GAME : 8 번째 안에 다 맞춰야한다.
@@ -18,11 +19,11 @@ const GameUFOMain = () => {
     // 결과    
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
+    const [loading, setLoading] = useState(true)
 
     // 초기 힌트와 단어 생성
     useEffect(() =>{
-        getSecretWord()
-        getHints()
+        getReadyForUfoGame()
     },[])
 
     // 패배 조건 확인
@@ -36,24 +37,21 @@ const GameUFOMain = () => {
         {win ? setGameWon(true) : setGameWon(false)};
     },[guessedLetters])
 
-    // 단어 생성
-    // TODO : 단어를 실제로 요청하여 가져온다.
-    const getSecretWord = () =>{
-        setSecretWord("RRREACT")
-    }
+    // 게임 준비 : 단어 및 힌트 생성
+    const getReadyForUfoGame = async () =>{
+        setLoading(true)
+        const response = await axiosInstance.get("/game/ufo/getSecretWordAndHints")
 
-    // 힌트 생성
-    // TODO : 힌트는 Gemini 로 부터 7개를 한번에 받는다. 
-    const getHints = () =>{
-        setHints([    
-            "A JavaScript library Developed by Facebook Used for building UIs Based on components Uses JSX Popular with front-end devs Often used with hooks",
-            "Used in front-end and back-end development Often combined with HTML and CSS Supports functional and object-oriented styles Part of the web's core technologies Has first-class functions Can run in browsers and servers Asynchronous operations",
-            "Markup language Used to structure web pages Works with CSS and JS Has elements and tags Fundamental to web development Defines document structure Used for building web content",
-            "Style sheet language Used for web design Works with HTML Controls the layout Defines colors, fonts, etc. Supports responsive design Fundamental for web appearance",
-            "Reusable building blocks Used in UI libraries Encapsulates behavior and UI Commonly used in React Helps organize code Allows composition Enhances maintainability",
-            "Reusable building blocks Used in UI libraries Encapsulates behavior and UI Commonly used in React Helps organize code Allows composition Enhances maintainability",
-            "Reusable building blocks Used in UI libraries Encapsulates behavior and UI Commonly used in React Helps organize code Allows composition Enhances maintainability"
-        ])
+        if(response.hasOwnProperty("hints") && response.hasOwnProperty("word")){
+            setSecretWord(response.word.wordSpell.toUpperCase())
+            setHints(response.hints)
+            setLoading(false)
+        }else{
+            alert(response.message);
+        }
+
+        // setSecretWord("RRCCCREATE")
+        // setHints(new Array().fill(0))
     }
 
     // 정답 제출
@@ -70,7 +68,7 @@ const GameUFOMain = () => {
         setInput("");
     };
 
-    // 승리 조건 체크
+    // 승리 조건
     const checkWin = useCallback(()=>{
         // SecretWord 의 내부에 있는 단어가, guessedLetters 안에 전부 포함되어있는지 확인
         const correctSet = new Set(secretWord.split(""))
@@ -105,16 +103,23 @@ const GameUFOMain = () => {
     } 
 
     const handleNewGame = () => {
+        resetGame() // 초기화
+        getReadyForUfoGame()    // 새단어 생성
+    };
+
+    const resetGame = () =>{
         setGuessedLetters([]);
+        setSecretWord("");
         setIncorrectGuesses(0);
         setHintIndex(0);
         setGameOver(false);
         setGameWon(false);
         setShowHint(false);
-    };
+    }
 
     return (
         <div className={style['game-container']}>
+            {loading ? <p>로딩중 </p> : <></>}
             <h1>UFO Game - Guess the Word</h1>
 
             <div className={style['word-display']}>

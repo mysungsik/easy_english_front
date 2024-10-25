@@ -22,7 +22,7 @@ export const createFallingWordInterval = (setFallingWords, setGameStart, setGame
                         setGameStart(false);
                         setGameOver(true)
                     }
-                    return { ...wordObj, top: wordObj.top + 0.5 }; // 떨어지는 칸수
+                    return { ...wordObj, top: wordObj.top + 0.5 }; // 한번에 떨어지는 정도를 top 으로 조정
                 })
             );
         }, fallingSpeed) // 떨어지는 칸수의 주기(점차 빨라짐)
