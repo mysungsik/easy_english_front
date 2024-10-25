@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import style from "./game-rain-main.module.css"; // Assuming you're using CSS modules
 import { createFallingWordInterval, createWordInterval } from "../../util/createInterval";
-
-// TODO : WordList DB로부터 받아오기
-const wordList = ["apple", "banana", "orange", "grape", "melon"];
+import axiosInstance from "../../config/axiosConfig";
 
 const GameRainMain = () => {
+    const [wordList, setWordList] = useState([])
     const [fallingWords, setFallingWords] = useState([]);
     const [currTime, setCurrTime] = useState(0)
-    const [fallingSpeed, setFallingSpeed] = useState(41)
+    const [fallingSpeed, setFallingSpeed] = useState(51)
     const [input, setInput] = useState("");
     const [gameStart, setGameStart] = useState(false);
     const [gameOver, setGameOver] = useState(false);
@@ -17,56 +16,50 @@ const GameRainMain = () => {
     const wordInterval = useRef(null)
     const timerInterval = useRef(null)
 
-    // 단어 생성 인터벌 생성
+    useEffect(()=>{
+        getWord()
+    },[])
+    
     useEffect(() => {
         if (gameStart) {
+            // 화면에 단어 생성하는 인터벌 생성
             wordInterval.current = createWordInterval(wordList, setFallingWords, 2000)
-        }
-        return () => {clearInterval(wordInterval.current)}
-    }, [gameStart]);
-
-    // 내려가는 화면 인터벌 생성
-    useEffect(() => {
-        if(gameStart){
+            // 내려가는 애니메이션 발생 인터벌 생성
             fallingInterval.current = createFallingWordInterval(setFallingWords, setGameStart, setGameOver, fallingSpeed)
-        }
-        return () => {clearInterval(fallingInterval.current)}
-    }, [gameStart]);
-
-    // 타이머
-    useEffect(()=>{
-        if (gameStart){
+            // 타이머
             timerInterval.current = setInterval(()=>{
                 setCurrTime(prev => prev+1)
             },1000)
         }
-        return () => {clearInterval(timerInterval.current)}
-    },[gameStart])
+        return () => {
+                clearInterval(wordInterval.current)
+                clearInterval(fallingInterval.current)
+                clearInterval(timerInterval.current)
+        }
+    }, [gameStart]);
 
     // 자동 난이도 조정
     useEffect(()=>{
         if (currTime % 20 === 0 && currTime !== 0){ // 매 20초마다
             if (fallingSpeed > 1){
                 // 떨어지는 속도 상승
-                setFallingSpeed(prev => prev - 10) 
                 clearInterval(fallingInterval.current)
-                setTimeout( // useState 의 set 이 먹히게 하기 위해 Timeout 함수와 함께 실행
-                    fallingInterval.current = createFallingWordInterval(setFallingWords, setGameStart, setGameOver, fallingSpeed), 1
-                )
+                // useState 의 비동기에 의해 사용하지 못할 수 있으므로, 수기로 설정
+                fallingInterval.current = createFallingWordInterval(setFallingWords, setGameStart, setGameOver, fallingSpeed - 10)
+                setFallingSpeed(prev => prev - 10) 
             } else if (fallingSpeed == 1){
                 // 떨어지는 속도가 최대가 된다면 단어 나오는 속도를 1초로 변경
                 clearInterval(wordInterval.current)
-                setTimeout( // useState 의 set 이 먹히게 하기 위해 Timeout 함수와 함께 실행
-                    wordInterval.current = createWordInterval(wordList, setFallingWords, 1000), 1
-                )
+                wordInterval.current = createWordInterval(wordList, setFallingWords, 1000)
+            
             }
         }
     },[currTime])
 
     // 입력창 핸들러
-    const handleInputChange = (e) => {
+    const handleInputChange = useCallback((e)=> {
         setInput(e.target.value);
-    };
+    },[]);
 
     // 입력시 화면 단어 제거
     const handleKeyPress = (e) => {
@@ -78,6 +71,16 @@ const GameRainMain = () => {
         }
     };
 
+    const getWord = useCallback(async ()=>{
+            const response = await axiosInstance.get("/game/rain/getWordsForRain")
+    
+            if (response.data !== "" || response.data !== null){
+                setWordList(response.data)
+            }else{
+                alert(response.message)
+            }
+        },[])
+    
     // 게임 시작 및 초기화
     const handleGameStart = () =>{
         setFallingWords([])
@@ -87,6 +90,7 @@ const GameRainMain = () => {
         setFallingSpeed(40)
         setCurrTime(0)
     }
+
     return (
         <div className={style['game-container']}>
             {gameStart ? (

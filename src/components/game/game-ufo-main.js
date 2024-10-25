@@ -26,6 +26,8 @@ const GameUFOMain = () => {
         getReadyForUfoGame()
     },[])
 
+    console.log("aaa")
+
     // 패배 조건 확인
     useEffect (() =>{
         checkGameOver()
