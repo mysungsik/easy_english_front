@@ -18,7 +18,7 @@ function App() {
   const {user} = useContext(UserContext);
 
   return (
-    <div className="App">
+    <div className="App bg-linear__b_llblue">
       <Routes>
         <Route path="/" element={<PageDashboard/>}></Route>
         <Route path="/login" element={<PageLogin/>}></Route>

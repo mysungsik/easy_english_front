@@ -27,8 +27,8 @@ const Header = () => {
     }
 
     return (
-        <div className={`${style['header-background']}`}>
-            <header className={`${navId !== "" ? style['show'] : style['hide']}`}>
+        <section className={`${style['header-section']}`}>
+            <header className={`${style['header-nav']} bg__white ${navId !== "" ? style['show'] : style['hide']}`}>
                 {/* 헤더 상단 */}
                 <div className={`${style['header-top']} `}>
                     {/* 로고 및 네비게이션 파트 */}
@@ -38,10 +38,10 @@ const Header = () => {
                         </Link>
                         <div className={`${style['left-nav']}`}>
                             <ul className={'d-flex'}>
-                                <li className={`fs-20 pointer`} onMouseEnter={() => handleMouseEnter("learn")} onMouseLeave={handleMouseLeave}>
+                                <li className={`fs__l fw__b pointer`} onMouseEnter={() => handleMouseEnter("learn")} onMouseLeave={handleMouseLeave}>
                                     학습하기
                                 </li>
-                                <li className={`fs-20 pointer`} onMouseEnter={() => handleMouseEnter("game")} onMouseLeave={handleMouseLeave}>
+                                <li className={`fs__l fw__b pointer`} onMouseEnter={() => handleMouseEnter("game")} onMouseLeave={handleMouseLeave}>
                                     게임하기
                                 </li>
                             </ul>
@@ -49,48 +49,49 @@ const Header = () => {
                     </div>
                     {/* 유저 로그인 파트 */}
                     {Object.keys(user).length > 0 ?
-                        <div>
-                            <p> 안녕하세요 {user.memberNickname}</p>
+                        <div className={`${style['header-top-right']} d-flex__r`}>
+                            <p> 안녕하세요 {user.membebhjujrNickname}</p>
                             <button onClick={logout}> 로그아웃 </button>
                         </div>
                         :
-                        <div className={`${style['header-top-right']}`}>
-                            <Link to={"/login"} className={`btn-small__blue loginBtn`}> 로그인 </Link>
+                        <div className={`${style['header-top-right']} d-flex__r`}>
+                            <Link to={"/login"} className={`btn-small btn__white`}> 회원가입 </Link>
+                            <Link to={"/login"} className={`btn-small btn__blue`}> 로그인 </Link>
                         </div>
                     }
                 </div>
                 {/* 헤더 하단 슬라이드 */}
                 <div
-                    className={`${style['header-bot']} base__blue`}
+                    className={`${style['header-bot']} bg__white bs__gray`}
                     onMouseEnter={() => handleMouseEnter(navId)}
                     onMouseLeave={handleMouseLeave}
                 >
                     {navId === "learn" && (
                         <ul>
                             <li>
-                                <Link to={"/learn/today"} className="fc__white"> 오늘의 학습 </Link>
+                                <Link to={"/learn/today"} className="fc__black text-hover__black"> 오늘의 학습 </Link>
                             </li>
                             <li>
-                                <Link to={"/learn/review"} className="fc__white"> 복습 </Link>
+                                <Link to={"/learn/review"} className="fc__black text-hover__black"> 복습 </Link>
                             </li>
                             <li>
-                                <Link to={"/learn/repeatNote"} className="fc__white"> 나의 단어장 </Link>
+                                <Link to={"/learn/repeatNote"} className="fc__black text-hover__black"> 나의 단어장 </Link>
                             </li>
                         </ul>
                     )}
                     {navId === "game" && (
                         <ul>
                             <li>
-                                <Link to={"/game/ufo"} className="fc__white"> UFO 게임 </Link>
+                                <Link to={"/game/ufo"} className="fc__black text-hover__black"> UFO 게임 </Link>
                             </li>
                             <li>
-                                <Link to={"/game/rain"} className="fc__white"> 글자 비 </Link>
+                                <Link to={"/game/rain"} className="fc__black text-hover__black"> 글자 비 </Link>
                             </li>
                         </ul>
                     )}
                 </div>
             </header>
-        </div>
+        </section>
     )
 }
 

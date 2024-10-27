@@ -1,0 +1,151 @@
+.dashboard-main-section{
+    width: 1024px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 70px 0;
+}
+
+/* 상단 타이틀 ===================== */
+.dashboard-title-div{
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.dashboard-title-div .dashboard-title{
+    width: 550px;
+    margin: 5px auto;
+}
+
+.dashboard-title-div .dashboard-subtitle{
+    margin: 20px auto;
+}
+
+/* 중단 - 새단어 공부하기 설명 ===================== */
+.dashboard-content-1{
+    padding: 60px 0;
+    display: flex;
+    text-align: center;
+    gap: 60px;
+}
+
+.dashboard-content-1 .content-1-info-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-content-1 .content-1-info-div .content-1-title{
+    width: 460px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.dashboard-content-1 .content-1-info-div .content-1-subtitle{
+    width: 400px;
+    padding-left: 75px;
+    text-align: left;
+}
+
+.dashboard-content-1 .content-1-img-div{
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* 중단 - 게임 컨텐츠 설명 ===================== */
+.dashboard-content-2{
+    padding: 60px 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.dashboard-content-2 .content-2-info-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-content-2 .content-2-info-div .content-2-title{
+    width: 400px;
+    padding-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.dashboard-content-2 .content-2-info-div .content-2-subtitle{
+    width: 400px;
+    padding-left: 75px;
+    text-align: left;
+}
+
+.dashboard-content-2 .content-2-games-div{
+    display: flex;
+    gap: 20px;
+}
+
+/* 게임 카드 --- */
+.card-section{
+    width: 260px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 15px 20px;
+}
+
+.card-title-div{
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.card-title{
+    align-self: flex-start;
+}
+
+.card-description{
+    align-self: flex-start;
+}
+
+/* 중단 - 복습 방법 설명 설명 ===================== */
+.dashboard-content-3{
+    width: 870px;
+    height: 270px;
+    margin: 0 auto;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.dashboard-content-3 .content-3-info-div{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-content-3 .content-3-info-div p {
+    text-align: left;
+    width: 400px;
+    margin: 15px auto;
+}
+
+.dashboard-content-3 .content-3-btns-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: 40%;
+}

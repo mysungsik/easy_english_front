@@ -1,8 +1,10 @@
-.header-background{
+.header-section{
     height: 100px;
+    width: 1024px;
+    margin: 0 auto;
 }
 
-header {
+.header-nav {
     position: absolute;
     z-index: 100;
     height: 100px;
@@ -18,54 +20,68 @@ header {
 }
 
 .show{
-    transition: ease-in-out all 0.3s;
-    height: 160px !important;
+    transition: ease-out all 0.2s;
+    height: 180px !important;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    
+    box-shadow: 6px 6px 7px rgba(99, 99, 99, 0.431) !important;
 }
 
 .hide{
-    transition: ease-in-out all 0.3s;
-    height: 100px;
+    transition: ease-in all 0.2s;
 }
 
-header .header-top{
+.header-nav .header-top{
     height: 100px;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-
-header .header-top .header-top-left{
+.header-nav .header-top .header-top-left{
+    height: 100px;
     display: flex;
     align-items: center;
 }
 
-header .header-top .left-logo{
+.header-nav .header-top .left-logo{
+    height: 90px;
     width: 100px;
     margin-right: 10px;
 }
 
-header .header-top .left-nav ul{
+.header-nav .header-top .left-nav ul{
     display: flex;
     gap: 20px;
 }
 
 /* 헤더 네비게이션 드롭다운*/
-header .header-bot{
-    height: 60px;
+.header-nav .header-bot{
+    height: 100px;
+    width: 1024px;
     display: flex;
     align-items: center;
-    padding-left: 100px;
+    padding: 0 100px;
+    overflow: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     
 }
 
-header .header-bot ul{
+.header-nav .header-bot ul{
+    border-top: 2px solid rgba(185, 185, 185, 0.422);
+    width: 100%;
+    height: 100%;
     display: flex;
+    align-items: center;
     gap: 40px;
 }
 
-header .header-top-right{
-    align-self: center;
+.header-nav .header-top-right{
+    gap : 20px;
+    margin-right: 20px;
+    align-items: center;
 }
 /* 헤더 로그인유저 드롭다운 START ---------*/
 .header-top .header-top-user .dropdown-menu{
