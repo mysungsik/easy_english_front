@@ -49,8 +49,10 @@ const LoginForm = () => {
 
     return (
         <section className={`${style['login-form-section']}`}>
-            <p className={`${style['header-text']}`}> 로그인 </p>
-            <form name="loginForm" className={`${style['login-form']} base__lblue br-15 box-shadow`}>
+            {/* 상단 타이틀 */}
+            <p className={`${style['header-text']} mt-20`}> 로그인 </p>
+            {/* 로그인 폼 */}
+            <form name="loginForm" className={`${style['login-form']} bg__llblue br-15 bs__gray`}>
                 <div className={`${style['login-essential']} mt-20`}>
                     <div>
                         <input className={`box-shadow`} type="text" name="memberId" placeholder="아이디를 입력해주세요" onChange={(e)=>{handleUserInput(e)}}/>
@@ -64,18 +66,14 @@ const LoginForm = () => {
                         }
                     </div>
                 </div>
-                <button className={`btn-big__blue`}  onClick={login}>
+                <button className={`btn-big btn__blue`}  onClick={login}>
                     로그인
                 </button>
-                <div className={`${style['term-check-div']} checkbox__blue`}>
-                    <input className={`${style['term-check']}`} type="checkbox" id="stay-login" name="stay_login" />
-                    <label htmlFor="stay-login" className={`fs-14`}>로그인 상태유지</label>
-                </div>
-                <div className={`${style['login-sub']}`}>
+                <div className={`${style['login-sub']} mt-20`}>
                     <div>
-                        <Link className={`fc__gray text-hover__gray`} to={`/findInfo/findId`}> 아이디 찾기 </Link>
-                        |<Link className={`fc__gray text-hover__gray`} to={'/findInfo/findPw'}> 비밀번호 찾기</Link>
-                        |<Link className={`fc__gray text-hover__gray`} to={`/signup`}>회원가입 </Link>
+                        <Link className={`text-hover__gray`} to={`/findInfo/findId`}> 아이디 찾기 </Link>
+                        |<Link className={`text-hover__gray`} to={'/findInfo/findPw'}> 비밀번호 찾기</Link>
+                        |<Link className={`text-hover__gray`} to={`/signup`}>회원가입 </Link>
                     </div>
                     <img src={`/logo/logo_main.png`} alt="logo" />
                 </div>

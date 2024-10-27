@@ -61,19 +61,27 @@ const signup = async (e) =>{
 }
 
     return (
-        <section className={`${style['signup-form-section']}`}>
-        <p className={`${style['header-text']}`}> 회원가입 </p>
-            <form name="signupForm" className={`${style['signup-form']} base__lblue br-15 box-shadow`}>
-                <p className={`fs-20__b`}> 회원 정보</p>
+        <section className={`${style['signup-form-section']} `}>
+        <p className={`${style['header-text']} mt-20`}> 회원가입 </p>
+            <form name="signupForm" className={`${style['signup-form']} bg__llblue br-15 bs__gray`}>
+                <p className={`fs__l fw__b`}> 회원 정보</p>
                 <div className={`${style['signup-essential']}`}>
                     <div>
                         <p className={`${style['signup-subtitle']}`}> 회원 아이디 </p>
-                        <input className={`box-shadow`} type="text" name="memberId" onChange={(e)=>handleUserInput(e)} placeholder="ID : *소문자를 포함 5~13 글자 / 대문자 및 숫자 사용가능" />
+                        <input className={`bs__gray fs__m`} 
+                            type="text" 
+                            name="memberId" 
+                            onChange={(e)=>handleUserInput(e)} 
+                            placeholder="ID : *소문자를 포함 3~10 글자" />
                         {validation.idValidate === false && signupInfo.memberId !== ''  ? <p className={`${style['validate-fail']}`}>*아이디 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}> 패스워드 </p>
-                        <input className={`box-shadow`}  type={showPassword ? "text" : "password"} name="memberPw" onChange={(e)=>handleUserInput(e)} placeholder="PW : *최소 한개의 소문자, 대문자, 숫자를 포함 10~20 글자 / 특수문자 사용가능" />
+                        <input className={`bs__gray fs__m`}  
+                            type={showPassword ? "text" : "password"} 
+                            name="memberPw" 
+                            onChange={(e)=>handleUserInput(e)} 
+                            placeholder="PW : *최소 한개의 소문자, 대문자, 숫자를 포함 5~20 글자" />
                         {showPassword ? 
                             <img className={`${style['password-eye']}`} src={`/icons/eye.png`} onClick={handlePasswordToggle} alt="password-eye" />
                             :                  
@@ -83,16 +91,16 @@ const signup = async (e) =>{
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}>이메일</p>
-                        <input className={`box-shadow`} type="text" name="memberEmail" onChange={(e)=>handleUserInput(e)}  placeholder="EMAIL : 이메일 형식" />
+                        <input className={`bs__gray`} type="text" name="memberEmail" onChange={(e)=>handleUserInput(e)}  placeholder="EMAIL : 이메일 형식" />
                         {validation.emailValidate === false && signupInfo.memberEmail !== ''  ? <p className={`${style['validate-fail']}`}>*이메일 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}>닉네임</p>
-                        <input className={`box-shadow`} type="text" name="memberNickname" onChange={(e)=>handleUserInput(e)}  placeholder="NICKNAME : 20자 이내의 영어,한글" />
+                        <input className={`bs__gray`} type="text" name="memberNickname" onChange={(e)=>handleUserInput(e)}  placeholder="NICKNAME : 20자 이내의 영어,한글" />
                         {validation.nicknameValidate === false && signupInfo.memberNickname !== ''  ? <p className={`${style['validate-fail']}`}>*닉네임 형식이 올바르지 않습니다.</p> : ''}
                     </div>
                 </div>
-	            <button className={`btn-big__blue `} type='button' onClick={signup}>    
+	            <button className={`btn-big btn__blue `} type='button' onClick={signup}>    
 	                회원가입
 	            </button>
             </form>
