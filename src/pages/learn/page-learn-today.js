@@ -1,14 +1,91 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
 import LearnMain from "../../components/learn/learn-main"
-import LearnSide from "../../components/learn/learn-side"
+import CommonLeftSidebar from "../../components/common/sidebar/common-left-sidebar";
 import axiosInstance from "../../config/axiosConfig";
+import style from "./page-learn-today.module.css"
+import LearnTodayRightSidebar from "../../components/learn/learn-today-right-sidebar";
 
 const PageLearnToday = ({user}) => {
     const [question, setQuestion] = useState({})
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
+
+    // Right SideBar용
+    const [hintLevel, setHintLevel] = useState(0)
+    const [saved, setSaved] = useState(false)
+    const [answer, setAnswer] = useState("")
+
+    // 단어장 저장 유무 확인, 힌트 리셋
+    useLayoutEffect(()=>{
+        if( Object.keys(user).length > 0 && (question.hasOwnProperty("wordId")) ){
+            getWordFromRepeatNote(user.memberNo, question.wordId)
+        }
+        setHintLevel(0)
+    },[question])
+
+    // 단어저장 유무 확인 함수
+    const getWordFromRepeatNote = async (memberNo, wordId) =>{
+        const response = await axiosInstance.get(`/learn/checkWordFromRepeatNote?memberNo=${memberNo}&wordId=${wordId}`)
+
+        console.log(response.data)
+        if (response.data >= 1){
+            setSaved(true)
+        }else if (response.data == 0 || response.data !== null || response.data === ""){
+            setSaved(false)
+        }
+    }
+
+    // 단어장 저장 함수
+    const saveWordToRepeatNote = async () =>{
+        const response = await axiosInstance.post("/learn/saveToRepatNote", {
+            memberNo : user.memberNo,
+            wordId : question.wordId
+        })
+
+        if ( Object.keys(response.data).length > 0){
+            setSaved(true)
+        }else{
+            setSaved(false)
+        }
+
+        alert(response.message)
+    }
+
+    // 단어장 삭제
+    const deleteWordToRepeatNote = async () =>{
+        const response = await axiosInstance.delete(`/learn/deleteWordFromRepatNote?memberNo=${user.memberNo}&wordId=${question.wordId}`)
+
+        if (response.data >= 1){
+            setSaved(false)
+        }else if (response.data == 0 || response.data !== null || response.data === ""){
+            setSaved(true)
+        }
+        alert(response.message)
+    }
+
+    // 힌트 확인
+    const showHint = () =>{
+        if (hintLevel === 0){
+            setAnswer("")
+        }
+        else if (hintLevel === 1 ){
+            setAnswer(question.wordSpell.substring(0,1))
+        }else{
+            setAnswer(question.wordSpell)
+        }
+    }
+
+    useEffect(()=>{
+        showHint()
+    },[hintLevel])
+
+    // 힌트 조작 핸들러
+    const handleHintCnt = ()=>{
+        hintLevel < 2 ? setHintLevel(hintLevel + 1) : setHintLevel(0)
+    }
+
 
     // useLayoutEffect 를 통해 화면 깜빡임 제거
     useLayoutEffect(()=>{
@@ -50,15 +127,39 @@ const PageLearnToday = ({user}) => {
         }
     }
 
+    // 음성 출력
+    const speechHint = ()=>{
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = question.exampleSentence;
+        utterance.lang = 'en-US'; // 언어 설정 (미국 영어)
+        utterance.rate = 1.0; // 속도 설정 (1이 기본)
+        utterance.pitch = 1.0; // 음높이 설정 (1이 기본)
+        speechSynthesis.speak(utterance);
+    }
+
+    const stateSideBar = {
+        repeatNoteState : {saved, setSaved, saveWordToRepeatNote, deleteWordToRepeatNote},
+        hintState : {hintLevel, setHintLevel, handleHintCnt},
+        utilState : {speechHint}
+    }
+
+
+
     return (
-        <div className="learntoday-page d-flex">
-            <LearnSide user={user}/>
+        <div className={`${style['learntoday-page']}`}>
+            <CommonLeftSidebar user={user}/>
             <LearnMain  
-                user={user} 
                 question={question} 
                 loading={loading} 
-                getWord={getWord} 
-                title={"오늘의 학습"}
+                getWord={getWord}
+                answer = {answer} 
+                setAnswer = {setAnswer}
+            />
+            <LearnTodayRightSidebar
+                user={user} 
+                question={question} 
+                loading={loading}
+                stateSideBar = {stateSideBar}
             />
         </div>
     )

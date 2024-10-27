@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import LearnMain from "../../components/learn/learn-main"
-import LearnSide from "../../components/learn/learn-side"
+import CommonLeftSidebar from "../../components/common/sidebar/common-left-sidebar";
 import { useNavigate } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 
@@ -36,8 +36,11 @@ const PageLearnReview = ({user}) => {
 
     return (
         <div className="learntoday-page d-flex">
-            <LearnSide user={user}/>
-            <LearnMain user={user} question={review} loading={loading} getWord={getWord} title={"단어 복습"}/>
+            <CommonLeftSidebar user={user}/>
+            <LearnMain user={user} 
+                question={review} 
+                loading={loading} 
+                getWord={getWord}/>
         </div>
     )
 }

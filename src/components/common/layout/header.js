@@ -50,8 +50,8 @@ const Header = () => {
                     {/* 유저 로그인 파트 */}
                     {Object.keys(user).length > 0 ?
                         <div className={`${style['header-top-right']} d-flex__r`}>
-                            <p> 안녕하세요 {user.membebhjujrNickname}</p>
-                            <button onClick={logout}> 로그아웃 </button>
+                            <p> 안녕하세요 {user.memberNickname}</p>
+                            <button className={`btn__red btn-small`} onClick={logout}> 로그아웃 </button>
                         </div>
                         :
                         <div className={`${style['header-top-right']} d-flex__r`}>

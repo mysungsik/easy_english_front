@@ -55,10 +55,10 @@ const LoginForm = () => {
             <form name="loginForm" className={`${style['login-form']} bg__llblue br-15 bs__gray`}>
                 <div className={`${style['login-essential']} mt-20`}>
                     <div>
-                        <input className={`box-shadow`} type="text" name="memberId" placeholder="아이디를 입력해주세요" onChange={(e)=>{handleUserInput(e)}}/>
+                        <input className={`bs__gray mt-8`} type="text" name="memberId" placeholder="아이디를 입력해주세요" onChange={(e)=>{handleUserInput(e)}}/>
                     </div>
                     <div>
-                        <input className={`box-shadow`} type={showPassword ? "text" : "password"} name="memberPw"  onChange={(e)=>{handleUserInput(e)}} placeholder="패스워드를 입력해주세요"/>
+                        <input className={`bs__gray mt-8`} type={showPassword ? "text" : "password"} name="memberPw"  onChange={(e)=>{handleUserInput(e)}} placeholder="패스워드를 입력해주세요"/>
                         {showPassword ? 
                             <img className={`${style['password-eye']}`} src={`/icons/eye.png`} onClick={handlePasswordToggle} alt="password-eye" />
                             :                  

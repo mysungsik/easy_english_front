@@ -52,45 +52,48 @@ img {
 /* Util ======================================================= */
 /* fonts AND texts -------- */
 .fs__s{
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .fs__m{
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 .fs__l{
-    font-size: 18px;
+    font-size: 18px !important;
 }
 
 .fs-header__s{
-    font-size: 20px;
+    font-size: 20px !important;
 }
 .fs-header__m{
-    font-size: 28px;
+    font-size: 28px !important;
 }
 .fs-header__l{
-    font-size: 36px;
+    font-size: 36px !important;
 }
 .fw__b{
-    font-weight: 700;
+    font-weight: 700 !important;
 }
 .fw__l{
-    font-weight: 300;
+    font-weight: 300 !important;
 }
 
 .fc__white{
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 .fc__gray{
-    color: #686868;
+    color: #686868 !important;
 }
 .fc__blue{
-    color: #0a75f8;
+    color: #0a75f8 !important;
+}
+.fc__black{
+    color: #000000 !important;
 }
 
 .text-shadow__gray{
-    text-shadow: 2px 2px 5px rgba(60, 60, 60, 0.617);
+    text-shadow: 2px 2px 5px rgba(60, 60, 60, 0.617) !important;
 }
 
 /* Hover - text */
@@ -148,7 +151,7 @@ img {
     background-color: #d8d8d8 !important;
 }
 .bg__llblue{
-    background-color: #A9CEFF !important;
+    background-color: #c5deff !important;
 }
 .bg__lblue{
     background-color: #86B7F9 !important;
@@ -171,9 +174,6 @@ img {
     background: linear-gradient(24deg, #e5f2ff, #e5f2ff, #a4cae9);
 }
 .bg-linear__r_blue{
-    background: linear-gradient(to right, #719ace, #6693ce);
-}
-.bg-linear__r_blue{
     background: linear-gradient(to right, #458BE2, #6DA3E8);
 }
 .bg-linear__b_black{
@@ -188,6 +188,10 @@ img {
 /* shadow -------- */
 .bs__gray {
     box-shadow: 6px 6px 7px rgba(99, 99, 99, 0.431) !important;
+}
+
+.bs-all__blue {
+    box-shadow: 2px 2px 7px rgba(154, 166, 183, 0.431) !important;
 }
 
 /* size -------- */
