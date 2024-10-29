@@ -1,64 +1,64 @@
 import { useState } from "react";
 import style from "./repeat-note-item.module.css"
+import axiosInstance from "../../config/axiosConfig"
 
-const RepeatNoteItem = ({ currentItems }) => {
-    /*
-    {
-        "wordId": 13,
-        "wordLevel": 1,
-        "wordSpell": "you",
-        "wordMean": "너",
-        "exampleSentence": "The truth is that you are the only one who can make you happy.",
-        "exampleMean": "사실은 행복하게 할 수 있는 사람은 당신 자신뿐이라는 것"
-    }
+const RepeatNoteItem = ({ currentItems, user , deleteWordToRepeatNote}) => {
+    /* "wordId","wordSpell","wordMean", "exampleSentence", "exampleMean"
     */
    
     return (
         <>
             {currentItems.length > 0 &&
                 currentItems.map((item, index) => (
-                    <Card item={item} key={index}/>
+                    <Card item={item} user={user} deleteWordToRepeatNote={deleteWordToRepeatNote} key={index}/>
             ))}
         </>
     );
 }
 
-const Card = ({item}) =>{
-    const [showMean, setShowMean] = useState(false)
+const Card = ({item, user, deleteWordToRepeatNote}) =>{
     const [showSentence, setShowSentence] = useState(false)
 
-    const handleShowMean = () =>{
-        setShowMean(prev=> !prev)
-    }
 
     const handleShowSentence = () =>{
         setShowSentence(prev=> !prev)
     }
 
     return(
-        <div className={`${style['repeat-note-item']}`}>
-        <div className={`${style['word-info-div']}`}>
-            <p className={`${style['word-spell']}`}>{item.wordSpell}</p>
-            <p className={ `${style['word-mean']} 
-                            ${showMean ? style['show'] : style['hide']}
-                            pointer`}
-                            onClick={handleShowMean}> 
-
-                {showMean ? item.wordMean : <span className="fc__white">클릭해서 확인 </span>}
-                
-            </p>
+    <div className={`${style['repeat-note-item']} `}>
+        <div className={`${style['item-top-div']} bg__white  bs__gray ${showSentence ? style['show'] : style['hide']}`}>
+            <div className={`${style['mean-info-div']}`}>
+                <div>
+                    <p>레벨 {item.wordId}</p>
+                    <p className="fs__l fw__b">{item.wordSpell}</p>
+                </div>
+                <div>
+                    <p className="fs__l fw__b">{item.wordMean}</p>
+                    {showSentence ? 
+                    <img
+                        src="/icons/arrow-top__black.png" 
+                        className="ml-8 pointer" 
+                        style={{width : "25px", height : "25px"}}
+                        onClick={handleShowSentence}/>
+                        :
+                    <img
+                        src="/icons/arrow-bot__black.png" 
+                        className="ml-8 pointer" 
+                        style={{width : "25px", height : "25px"}}
+                        onClick={handleShowSentence}/> 
+                    }
+                </div>
+            </div>
+            <div className={`${style['sentence-info-div']} bg__llblue bs__gray`}>
+                <p>
+                    {item.exampleMean}
+                </p>
+                <p className="mt-12" >
+                    {item.exampleSentence}
+                </p>
+            </div>
         </div>
-        <div className={`${style['word-example-mean-div']}`}>
-            <p className={`${style['word-example-mean-div']}`}>{item.exampleMean}</p>
-        </div>
-        <div className={`${style['word-example-sentence-div']}`}>
-            <p className={` ${style['word-example-sentence']} 
-                            ${showSentence ? style['show'] : style['hide']}
-                            pointer`}
-                            onClick={handleShowSentence}>
-                {showSentence ? item.exampleSentence : <span className="fc__white">클릭해서 확인 </span>}
-            </p>
-        </div>
+        <button className={`btn-small btn__red`} onClick={()=>{deleteWordToRepeatNote(user.memberNo, item.wordId)}}> 제거 </button>
     </div>
     )
 }

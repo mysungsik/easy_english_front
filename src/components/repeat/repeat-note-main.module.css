@@ -1,6 +1,11 @@
 /* 메인 ===================================== */
 .repeat-note-main-section{
+    margin-top: 10px;
     width: 75%;
-    height: 540px;
-    justify-items: center;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 15px;
+    margin-left: 20px;
 }

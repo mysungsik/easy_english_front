@@ -2,7 +2,8 @@ import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import RepeatNoteMain from "../../components/repeat/repeat-note-main";
 import axiosInstance from "../../config/axiosConfig";
-import RepeatNoteSide from "../../components/repeat/repeat-note-side";
+import CommonLeftSidebar from "../../components/common/sidebar/common-left-sidebar";
+import style from "./page-repeat-note.module.css"
 
 const PageRepeatNote = ({user}) =>{
     const [repeatNote, setRepeatNote] = useState([])
@@ -30,14 +31,26 @@ const PageRepeatNote = ({user}) =>{
         setLoading(false)
     }
 
+    // 단어장 삭제
+    const deleteWordToRepeatNote = async (memberNo, wordId) =>{
+        const response = await axiosInstance.delete(`/learn/deleteWordFromRepatNote?memberNo=${memberNo}&wordId=${wordId}`)
+
+        if (response.data >= 1){
+            setRepeatNote((prev) => prev.filter((item)=> item.wordId != wordId))
+        }
+        alert(response.message)
+    }
+
     return (
-        <div className="repeat-note-page d-flex">
-            <RepeatNoteSide user={user}/>
+        <div className={`${style['repeat-note-page']}`}>
+            <CommonLeftSidebar user={user}
+                                title={"단어장 확인"} />
             <RepeatNoteMain
                 user={user}
                 type={"repeat-note"}
                 repeatNote={repeatNote} 
                 loading={loading}
+                deleteWordToRepeatNote={deleteWordToRepeatNote}
             />
         </div>
     )

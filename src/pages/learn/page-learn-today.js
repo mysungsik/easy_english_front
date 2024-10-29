@@ -160,7 +160,8 @@ const PageLearnToday = ({user}) => {
 
     return (
         <div className={`${style['learntoday-page']}`}>
-            <CommonLeftSidebar user={user}/>
+            <CommonLeftSidebar user={user}
+                                title={"새 단어 학습"}/>
             <LearnMain  
                 question={question} 
                 loading={loading} 

@@ -131,7 +131,8 @@ const PageLearnReview = ({user}) => {
 
     return (
         <div className={`${style['learnreview-page']}`}>
-            <CommonLeftSidebar user={user}/>
+            <CommonLeftSidebar user={user}
+                                title={"복습하기"} />
             <LearnMain  
                 question={question} 
                 loading={loading} 

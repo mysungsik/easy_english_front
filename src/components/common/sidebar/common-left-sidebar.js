@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import style from "./common-left-sidebar.module.css"
 
-const CommonLeftSidebar = ({user}) =>{
+const CommonLeftSidebar = ({user, title}) =>{
     const navigate = useNavigate()
     
     const [time, setTime] = useState(0)
@@ -29,7 +29,7 @@ const CommonLeftSidebar = ({user}) =>{
     
                 {/* 설명 칸 */}
                 <div className={`${style['common-side-info-div']} mt-8`}>
-                    <p className={`${style['info-title']} fs-header__s fw__b fc__white mt-12`}>새 단어 학습</p>
+                    <p className={`${style['info-title']} fs-header__s fw__b fc__white mt-12`}>{title}</p>
                     <p className={`${style['info-description']} fs__s fc__white mt-12`}>
                         실생활에서 가장 잘 쓰이는 단어로 공부해요 <br/>
                         4500개의 필수 단어와 <br/>

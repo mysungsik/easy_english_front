@@ -2,4 +2,21 @@
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    padding-bottom: 10px;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+.pagination-main li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination-main .pagination-count.selected a{
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a75f8 !important;
 }

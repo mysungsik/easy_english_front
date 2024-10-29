@@ -1,69 +1,61 @@
-/* 메인 ===================================== */
 .repeat-note-item{
-    width: 75%;
-    max-width: 720px;
-    margin: 3px auto;
-    border : 1px solid black;
+    position: relative;
+    width: 750px;
+    height: 60px;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    flex-direction: column;
-    border-radius: 10px;
+}
+
+.repeat-note-item .item-top-div{
+    position: absolute;
+    width: 650px;
+    top: 5px;
+    left: 0;
     overflow: hidden;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    
 }
 
-.repeat-note-item p {
-    width: 90%;
+.repeat-note-item .item-top-div.show{
+    height: 145px !important;
+    transition: ease-out all 0.3s;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    z-index: 20;
+}
+
+.repeat-note-item .item-top-div.hide{
+    height: 60px !important;
+    transition: ease-in all 0.3s;
+    z-index: 15;
+}
+
+/* 얘가  */
+.repeat-note-item .item-top-div .mean-info-div{ 
+    height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-self: start;
+    padding: 0 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    z-index: 16;
 }
 
-.repeat-note-item .word-info-div{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.repeat-note-item .word-info-div .word-spell{
-    font-size: 24px;
-}
-.repeat-note-item .word-info-div .word-mean {
+.repeat-note-item .item-top-div .mean-info-div > div{
     height: 100%;
-    font-size: 16px;
-}
-
-.repeat-note-item .word-example-mean-div {
-    width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    margin: 5px 0;
+    gap: 15px;
 }
 
-.repeat-note-item .word-example-sentence-div{
+.sentence-info-div{
+    position: absolute;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 40px;
-}
-
-.repeat-note-item .word-example-sentence-div .word-example-sentence{
-    width: 100%;
-    height: 100%;
-    padding: 5px 0;
-}
-
-.hide{
-    background-color: black;
-    color: black;
-    transition: all ease-in-out 0.3s;
-}
-
-.show{
-    background-color: white;
-    transition: all ease-in-out 0.3s;
+    z-index: 1000 !important;
+    padding: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
