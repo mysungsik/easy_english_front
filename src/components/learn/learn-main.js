@@ -7,7 +7,7 @@ const LearnMain = ({question, loading, getWord, answer, setAnswer}) =>{
     
     // word의 길이에 따른 input 너비 계산 함수
     const getInputWidth = (wordLength) => {
-        return wordLength * 14 + 'px'; // 1글자당 10px로 가정
+        return wordLength * 15 + 'px'; // 1글자당 10px로 가정
     };
 
     // 정답 핸들러

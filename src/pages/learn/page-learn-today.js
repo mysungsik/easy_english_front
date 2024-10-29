@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 import LearnMain from "../../components/learn/learn-main"
 import CommonLeftSidebar from "../../components/common/sidebar/common-left-sidebar";
 import axiosInstance from "../../config/axiosConfig";
-import style from "./page-learn-today.module.css"
-import LearnTodayRightSidebar from "../../components/learn/learn-today-right-sidebar";
+import style from "./page-learn.module.css"
+import LearnRightSidebar from "../../components/learn/learn-right-sidebar";
 
 const PageLearnToday = ({user}) => {
     const [question, setQuestion] = useState({})
@@ -127,13 +127,28 @@ const PageLearnToday = ({user}) => {
         }
     }
 
+    const utterance = new SpeechSynthesisUtterance();
+
     // 음성 출력
     const speechHint = ()=>{
+        if (speechSynthesis.speaking) { // speechSynthesis : 브라우저의 내장객체. 음성 출력 담당
+            speechSynthesis.cancel()
+        }
+        
         const utterance = new SpeechSynthesisUtterance();
         utterance.text = question.exampleSentence;
         utterance.lang = 'en-US'; // 언어 설정 (미국 영어)
         utterance.rate = 1.0; // 속도 설정 (1이 기본)
         utterance.pitch = 1.0; // 음높이 설정 (1이 기본)
+    
+        // utterance.onend = () => {
+        //     console.log("Speech synthesis completed successfully.");
+        // };
+    
+        // utterance.onerror = (event) => {
+        //     console.error("Speech synthesis error:", event.error);
+        // };
+    
         speechSynthesis.speak(utterance);
     }
 
@@ -142,8 +157,6 @@ const PageLearnToday = ({user}) => {
         hintState : {hintLevel, setHintLevel, handleHintCnt},
         utilState : {speechHint}
     }
-
-
 
     return (
         <div className={`${style['learntoday-page']}`}>
@@ -155,7 +168,7 @@ const PageLearnToday = ({user}) => {
                 answer = {answer} 
                 setAnswer = {setAnswer}
             />
-            <LearnTodayRightSidebar
+            <LearnRightSidebar
                 user={user} 
                 question={question} 
                 loading={loading}
