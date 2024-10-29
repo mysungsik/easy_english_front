@@ -1,38 +1,120 @@
 .game-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 700px;
-    font-family: Arial, sans-serif;
 }
 
-.word-display {
+/* 게임섹션 ==========================  */
+.game-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 720px;
+    height: 590px;
+    margin-top: 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.game-section .ufo-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.16;
+    height: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+.game-section .ufo-background2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 1;
+    height: 50%;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+/* 힌트칸  */
+.game-section .hint-div {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.game-section .hint-div .hint{
+    width: 350px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    color: black;
+    padding: 5px 10px;
+}
+
+/* 추측 단어칸 */
+.game-section .word-guess-div {
+    width: 350px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.game-section .guess-word {
+    margin-left: 20px;
+}
+
+/* 문제칸 */
+.game-section .word-check-div{   
     display: flex;
     gap: 10px;
-    font-size: 2rem;
+    height: 30px;
     margin-bottom: 20px;
 }
 
-.letter {
-    border-bottom: 2px solid #000;
-    width: 30px;
+.game-section .word-check-div .letter{
+    width: 35px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid rgb(199, 199, 199);
+}
+
+/* 입력칸 */
+.game-section .input-div{
+    display: flex;
+    gap: 10px;
+    height: 40px;
+    background-color: black;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    z-index: 10;
+}
+
+.game-section .input-div input{
+    height: 40px;
+    width: 60px;
+    font-size: 18px;
+    padding-left: 10px;
+    background-color: black;
+    border: none;
+    outline: none;
+    color: white;
     text-align: center;
 }
 
-.game-info {
-    margin-bottom: 20px;
-}
-/* 
-input {
-    font-size: 1rem;
-    padding: 5px;
+.game-section .input-div button{
+    height: 40px;
+    width: 50px;
+    border-top-left-radius: 3px;
 }
 
-button {
-    margin-left: 10px;
-    padding: 5px 10px;
-} */
+/* 힌트 창 및 추측단어 */
+
+/* 입력창 */
 
 .ufo-container {
     display: flex;
@@ -97,17 +179,11 @@ button {
     width: 160px;
 }
 
-.human {
-    width: 100px;
-    height: 50px;
-    background-color: #eee;
-    border: 2px solid #aaa;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    margin-top: 20px;
+.human-div img{
+    position: absolute;
+    bottom: 30px;
+    width: 150px;
+    height: 100px;
 }
 
 .abducted {
@@ -173,4 +249,14 @@ button {
     50% {
         transform: rotate(20deg);
     }
+}
+
+/* 사이드바 섹션 ==========================  */
+.sidebar-section{
+    width: 175px;
+    height: 590px;
+    margin-top: 10px;
+    margin-left: 15px;
+    border-radius: 20px;
+    padding: 10px;
 }

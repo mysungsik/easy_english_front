@@ -127,8 +127,6 @@ const PageLearnToday = ({user}) => {
         }
     }
 
-    const utterance = new SpeechSynthesisUtterance();
-
     // 음성 출력
     const speechHint = ()=>{
         if (speechSynthesis.speaking) { // speechSynthesis : 브라우저의 내장객체. 음성 출력 담당

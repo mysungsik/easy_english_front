@@ -30,7 +30,7 @@ function App() {
         </Route>
         <Route path='/game/*'>
             <Route path='rain' element={<PageWordRain/>}></Route>
-            <Route path='ufo' element={<PageUFOGame/>}></Route>
+            <Route path='ufo' element={<PageUFOGame user={user}/>}></Route>
         </Route>
         <Route path="/dashboard" element={<PageDashboard/>} />
         <Route path="/admin" element={<PageAdmin/>} />

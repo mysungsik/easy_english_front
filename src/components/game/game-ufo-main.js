@@ -26,7 +26,34 @@ const GameUFOMain = () => {
         getReadyForUfoGame()
     },[])
 
-    console.log("aaa")
+    // 승리 조건
+    const checkWin = useCallback(() => {
+        const correctSet = new Set(secretWord.split(""));
+        
+        // guessedLetters 중 맞는 글자만으로 새로운 세트를 생성합니다.
+        const correctGuessedLetters = guessedLetters.filter((letter) =>
+            correctSet.has(letter)
+        );
+        const guessedSet = new Set(correctGuessedLetters);
+    
+        // guessedSet의 모든 요소가 correctSet에 포함되는지 확인합니다.
+        if (correctSet.size !== 0 &&  correctSet.size === guessedSet.size) {
+            return Array.from(correctSet).every((letter) => guessedSet.has(letter));
+        }
+    
+        return false;
+    }, [secretWord, guessedLetters]);
+
+    const resetGame = () =>{
+        setGuessedLetters([]);
+        setSecretWord("");
+        setIncorrectGuesses(0);
+        setHintIndex(0);
+        setGameOver(false);
+        setGameWon(false);
+        setShowHint(false);
+    }
+
 
     // 패배 조건 확인
     useEffect (() =>{
@@ -36,6 +63,7 @@ const GameUFOMain = () => {
     // 승리 조건 확인
     useEffect(()=>{
         const win = checkWin()
+        console.log(win)
         {win ? setGameWon(true) : setGameWon(false)};
     },[guessedLetters])
 
@@ -51,12 +79,14 @@ const GameUFOMain = () => {
         }else{
             alert(response.message);
         }
-
-        // setSecretWord("RRCCCREATE")
-        // setHints(new Array().fill(0))
     }
 
     // 정답 제출
+    const handleEnterKey = (e) => {
+        if(e.key == "Enter"){
+            handleGuess()
+        }
+    }
     const handleGuess = () => {
         const letter = input.toUpperCase();
         if (letter && !guessedLetters.includes(letter) && !gameOver && !gameWon) {
@@ -69,22 +99,6 @@ const GameUFOMain = () => {
         }
         setInput("");
     };
-
-    // 승리 조건
-    const checkWin = useCallback(()=>{
-        // SecretWord 의 내부에 있는 단어가, guessedLetters 안에 전부 포함되어있는지 확인
-        const correctSet = new Set(secretWord.split(""))
-        const guessedSet = new Set(guessedLetters)
-
-        if (correctSet.size != 0 && correctSet.size === guessedSet.size){
-            for(let spell of correctSet){
-                if (!guessedSet.has(spell)){
-                    return false
-                }
-            }
-            return true
-        }
-    },[secretWord, guessedLetters]) 
 
     const handleInputChange = (e) => {
         setInput(e.target.value);
@@ -108,74 +122,88 @@ const GameUFOMain = () => {
         resetGame() // 초기화
         getReadyForUfoGame()    // 새단어 생성
     };
-
-    const resetGame = () =>{
-        setGuessedLetters([]);
-        setSecretWord("");
-        setIncorrectGuesses(0);
-        setHintIndex(0);
-        setGameOver(false);
-        setGameWon(false);
-        setShowHint(false);
-    }
-
     return (
         <div className={style['game-container']}>
-            {loading ? <p>로딩중 </p> : <></>}
-            <h1>UFO Game - Guess the Word</h1>
+            {/* 게임섹션 */}
+            <div className={`${style['game-section']} bg-linear__b_black`}>
+                <img className={`${style['ufo-background']}`} src="/game/ufo.png"></img>
+                <img className={`${style['ufo-background2']}`} src="/game/ufo.png"
+                    style={{ height: `${(incorrectGuesses + hintIndex) * 6.5}%` }}></img>
 
-            <div className={style['word-display']}>
-                {secretWord.split("").map((letter, index) => (
-                    <span key={index} className={style['letter']}>
-                        {guessedLetters.includes(letter) ? letter : "_"}
-                    </span>
-                ))}
-            </div>
-
-            <div className={style['game-info']}>
-                {showHint && <p>Hint: {hints[hintIndex - 1]}</p>}
-                <p>Guessed Letters: {guessedLetters.join(", ")}</p>
-            </div>
-
-            {!gameOver && !gameWon && (
-                <>
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={handleInputChange}
-                        maxLength="1"
-                        placeholder="Guess a letter"
-                    />
-                    <button onClick={handleGuess}>Guess</button>
-                    <button onClick={handleHintClick}>Show Hint</button>
-                </>
-            )}
-
-            {gameWon && (
-                <div>
-                    <h2 className={style['success-animation']}>Congratulations! You Won!</h2>
-                    <button onClick={handleNewGame}>New Game</button>
+                {/* 힌트 칸 */}
+                {loading ? <p> 힌트와 문제 생성중... </p> : <></>}
+                <div className={style['hint-div']}> 
+                    <p className={`${style['title']} fs__l fw__b`}> 힌트 </p>
+                    <p className={`${style['hint']} bg__white`}>
+                        {showHint ? hints[hintIndex - 1] : "" }
+                    </p>
                 </div>
-            )}
-            {gameOver && (
-                <div>
-                    <h2 className={style['failure-animation']}>Game Over! The UFO abducted the human!</h2>
-                    <button onClick={handleNewGame}>New Game</button>
-                </div>
-            )}
 
-            <div className={`${style['ufo-container']} ${gameOver ? style['ufo-abduct'] : ''} ${gameWon ? style['ufo-dance'] : ''}`}>
-                <div className={style['ufo']}>
-                    <p>UFO</p>
+                <div className={style['word-guess-div']}>
+                    <p className={`${style['title']} fs__l fw__b`}> 추측한 단어 목록 </p>
+                    <p className={`${style['guess-word']} fc__lgray`}>
+                        {guessedLetters.length > 0 ? guessedLetters.join(", ") : ""}
+                    </p>
                 </div>
-                <div className={style['beam-container']}>
-                    {new Array(incorrectGuesses + hintIndex).fill(0).map((_, index) => (    // '_' 는 해당 값이 필요없을때의 의미. 오로지 index 만 필요
-                        <div key={index} className={style['beam']}></div>
+
+                {/*  단어 확인 칸 */}
+                <div className={style['word-check-div']}>
+                    {secretWord.split("").map((letter, index) => (
+                        <span key={index} className={style['letter']}>
+                            {guessedLetters.includes(letter) ? letter : ""}
+                        </span>
                     ))}
                 </div>
-                <div className={`${style['human']} ${gameOver ? style['abducted'] : ''}`}>
-                    <p>HUMAN</p>
+
+                {/* 게임 패배시 */}
+                {gameOver && (
+                    <div>
+                        <h2 className={style['failure-animation']}>게임오버! 잡혀가버렸어요 ㅠㅠ!</h2>
+                    </div>
+                )}
+
+                {/* 게임 승리시 */}
+                {gameWon && (
+                    <div>
+                        <h2 className={style['success-animation']}>축하합니다! 구출에 성공했어요!</h2>
+                    </div>
+                )}
+
+                {/* 입력칸 */}
+                {!gameOver && !gameWon && (
+                    <div className={style['input-div']}>
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={handleInputChange}
+                            onKeyDown={handleEnterKey}
+                            maxLength="1"
+                        />
+                        <button className="btn-small btn__white" onClick={handleGuess}>입력</button>
+                    </div>
+                )}
+
+                {/* 화면 애니메이션 */}
+                <div className={`${style['human-div']} ${gameOver ? style['abducted'] : ''}`}>
+                    <img src="/game/sos.png"/>
                 </div>
+            </div>
+            {/* 사이드바 섹션 */}
+            <div className={`${style['sidebar-section']} bg-linear__b_black`}>
+                <button onClick={handleHintClick}  className={`btn__white btn-medium ml-8 mb-12`}>
+                    힌트 확인
+                    <img src="/icons/arrow-right__black.png" 
+                            className="ml-8" 
+                            style={{width : "25px", height : "25px"}}/>
+                </button>
+
+                {/* 게임 종료시 */}
+                <button onClick={handleNewGame} className={`btn__white btn-medium ml-8 mb-12`}>
+                    다시하기
+                    <img src="/icons/arrow-right__black.png" 
+                            className="ml-8" 
+                            style={{width : "25px", height : "25px"}}/>
+                </button>
             </div>
         </div>
     );

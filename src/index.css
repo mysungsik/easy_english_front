@@ -82,6 +82,9 @@ img {
 .fc__white{
     color: #FFFFFF !important;
 }
+.fc__lgray{
+    color: #d0d0d0 !important;
+}
 .fc__gray{
     color: #686868 !important;
 }
