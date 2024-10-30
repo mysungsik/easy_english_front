@@ -43,6 +43,7 @@
 }
 
 .game-section .hint-div .hint{
+    position: relative;
     width: 350px;
     height: 55px;
     display: flex;
@@ -80,6 +81,7 @@
     display: flex;
     justify-content: center;
     border-bottom: 2px solid rgb(199, 199, 199);
+    position: relative;
 }
 
 /* 입력칸 */
@@ -112,73 +114,7 @@
     border-top-left-radius: 3px;
 }
 
-/* 힌트 창 및 추측단어 */
-
-/* 입력창 */
-
-.ufo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.ufo {
-    width: 150px;
-    height: 80px;
-    background-color: #eee;
-    border: 2px solid #aaa;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.beam-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.beam {
-    width: 50px;
-    height: 10px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-bottom: 5px;
-    border: 1px solid #aaa;
-}
-
-.beam:nth-child(1) {
-    width: 40px;
-}
-
-.beam:nth-child(2) {
-    width: 60px;
-}
-
-.beam:nth-child(3) {
-    width: 80px;
-}
-
-.beam:nth-child(4) {
-    width: 100px;
-}
-
-.beam:nth-child(5) {
-    width: 120px;
-}
-
-.beam:nth-child(6) {
-    width: 140px;
-}
-
-.beam:nth-child(7) {
-    width: 160px;
-}
-
+/* 사람 이미지 */
 .human-div img{
     position: absolute;
     bottom: 30px;
@@ -186,6 +122,7 @@
     height: 100px;
 }
 
+/* 납치애니메이션 */
 .abducted {
     animation: abduct 2s forwards;
 }
@@ -221,41 +158,12 @@
     }
 }
 
-.ufo-abduct .ufo {
-    animation: ufo-abduct 2s infinite;
-}
-
-@keyframes ufo-abduct {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(50px);
-    }
-}
-
-.ufo-dance .ufo {
-    animation: ufo-dance 1.5s infinite;
-}
-
-@keyframes ufo-dance {
-
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    50% {
-        transform: rotate(20deg);
-    }
-}
 
 /* 사이드바 섹션 ==========================  */
 .sidebar-section{
     width: 175px;
     height: 590px;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 15px;
     border-radius: 20px;
     padding: 10px;

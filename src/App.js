@@ -29,7 +29,7 @@ function App() {
             <Route path='repeatNote' element={<PageRepeatNote user={user}/>}></Route>
         </Route>
         <Route path='/game/*'>
-            <Route path='rain' element={<PageWordRain/>}></Route>
+            <Route path='rain' element={<PageWordRain user={user}/>}></Route>
             <Route path='ufo' element={<PageUFOGame user={user}/>}></Route>
         </Route>
         <Route path="/dashboard" element={<PageDashboard/>} />
