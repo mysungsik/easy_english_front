@@ -48,8 +48,8 @@ const CommonLeftSidebar = ({user, title}) =>{
                             <p className={`fs__m`}> 반가워요!</p>
                         </div>
                     : 
-                        <div className={`${style['user-nickname-div']}`}>
-                            로그인 후 이용해주세요
+                        <div className={`${style['user-nickname-div']} fc__white`}>
+                            로그인하시면 기록할수있어요!
                         </div>
                     }
                 </div>
