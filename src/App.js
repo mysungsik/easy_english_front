@@ -11,6 +11,7 @@ import PageLearnReview from './pages/learn/page-learn-review';
 import PageRepeatNote from './pages/repeat/page-repeat-note';
 import PageUFOGame from './pages/game/page-ufo-game';
 import PageWordRain from './pages/game/page-rain-game'
+import PageDailyColumn from './pages/dailyColumn/page-daily-column';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='today' element={<PageLearnToday user={user}/>}></Route>
             <Route path='review' element={<PageLearnReview user={user}/>}></Route>
             <Route path='repeatNote' element={<PageRepeatNote user={user}/>}></Route>
+            <Route path='dailyColumn' element={<PageDailyColumn user={user}/>}></Route>
         </Route>
         <Route path='/game/*'>
             <Route path='rain' element={<PageWordRain user={user}/>}></Route>

@@ -15,7 +15,7 @@ const LearnMain = ({question, loading, getWord, answer, setAnswer}) =>{
         const value = e.target.value
         setAnswer(value)
     }
-
+    
     // 정답 제출
     const submitAnswer = () =>{
         if (answer.toLowerCase() == question.wordSpell.toLowerCase()){
@@ -27,6 +27,13 @@ const LearnMain = ({question, loading, getWord, answer, setAnswer}) =>{
             alert("아까워요! 다시 풀어보세요!")
         }
     }
+    
+    // 엔터핸들러
+    const handleEnter = (e) =>{
+        if (e.key === "Enter") {
+            submitAnswer()
+        }
+    };
 
     // 입력 리셋
     const resetInput = () =>{
@@ -67,7 +74,12 @@ const LearnMain = ({question, loading, getWord, answer, setAnswer}) =>{
             </div>
             {/* 정답 입력 */}
             <div className={`${style['word-answer-div']}`}>
-                    <input type="text" className={`${style['answer-input']} fs__l`} name="answer" value={answer} onChange={handleAnswer}/>
+                    <input type="text" className={`${style['answer-input']} fs__l`} 
+                            name="answer"
+                            value={answer} 
+                            onChange={handleAnswer}
+                            onKeyDown={handleEnter}
+                            />
                     <button className={`btn-big btn__blue fs__l`} onClick={submitAnswer}> 제출하기 </button>
             </div>
         </section>

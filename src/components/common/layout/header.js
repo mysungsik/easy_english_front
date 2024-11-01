@@ -55,7 +55,7 @@ const Header = () => {
                         </div>
                         :
                         <div className={`${style['header-top-right']} d-flex__r`}>
-                            <Link to={"/login"} className={`btn-small btn__white`}> 회원가입 </Link>
+                            <Link to={"/signup"} className={`btn-small btn__white`}> 회원가입 </Link>
                             <Link to={"/login"} className={`btn-small btn__blue`}> 로그인 </Link>
                         </div>
                     }
@@ -76,6 +76,9 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link to={"/learn/repeatNote"} className="fc__black text-hover__black"> 나의 단어장 </Link>
+                            </li>
+                            <li>
+                                <Link to={"/learn/dailyColumn"} className="fc__black text-hover__black"> 오늘의 칼럼 </Link>
                             </li>
                         </ul>
                     )}

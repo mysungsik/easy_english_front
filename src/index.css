@@ -168,6 +168,24 @@ img {
 .bg__white{
     background-color: #FFFFFF !important;
 }
+.bg__red{
+    background-color: #FFA2A2 !important;
+}
+.bg__orange{
+    background-color: #F3B55E !important;
+}
+.bg__yellow{
+    background-color: #F7FD9B !important;
+}
+.bg__green{
+    background-color: #A7FC93 !important;
+}
+.bg__navy{
+    background-color: #ABADFC !important;
+}
+.bg__purple{
+    background-color: #D685FF !important;
+}
 
 .bg-linear__r_llblue{
     background: linear-gradient(to right,#EEFAFF #DAEDFF);

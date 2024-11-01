@@ -1,0 +1,52 @@
+.column-main-section{
+    width: 700px;
+    height: 580px;
+    overflow-y: scroll;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+/* 컬럼 스크롤바 */
+.column-main-section::-webkit-scrollbar {
+    width: 7px;
+}
+
+.column-main-section::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.column-main-section::-webkit-scrollbar-thumb {
+    background-color: #458BE2;
+    border-radius: 20px;
+}
+
+.column-main-section::-webkit-scrollbar-button {
+    display: none;
+}
+
+
+.column-main-section .column-info{
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+/* 툴팁 표시 */
+.column-main-section .tooltip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    white-space: nowrap;
+    border-radius: 10px;
+    z-index: 1000;
+    transform: translate(-50%, -100%); /* Center and adjust tooltip above */
+}
+
+.column-main-section button{
+    margin-top: 10px;
+    width: 50px;
+    height: 30px;
+    align-self: flex-end;
+}   
