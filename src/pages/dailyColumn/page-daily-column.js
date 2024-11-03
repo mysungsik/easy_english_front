@@ -38,17 +38,14 @@ const PageDailyColumn = ({user}) => {
         }
     }
 
-    // 이전 7일의 데이터 정보만 가져오기
+    // 최근 7일의 칼럼 정보 가져오기
     const getColumnInfosBefore7days = async () =>{
-        setColumnInfos([
-            {topic : "Food", date : "24/10/25"},
-            {topic : "Music", date : "24/10/26"},
-            {topic : "Society", date : "24/10/27"},
-            {topic : "Technology", date : "24/10/28"},
-            {topic : "Relationships", date : "24/10/29"},
-            {topic : "Animal", date : "24/10/30"},
-            {topic : "Game", date : "24/11/1"}
-        ])
+        const response = await axiosInstance.get(`/dailyColumn/getRecentColumnsInfo`);
+        if (response.data === "" || response.data === null){
+            alert("해당 날짜의 칼럼정보가 없습니다.");
+        }else{
+            setColumnInfos(response.data)
+        }
     }
 
     // 컬럼마다 다른 백그라운드 색
