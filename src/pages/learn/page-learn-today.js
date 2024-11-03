@@ -156,10 +156,18 @@ const PageLearnToday = ({user}) => {
         utilState : {speechHint}
     }
 
+    const sideDesc= [
+        "실생활에서 가장 잘 쓰이는 단어로 공부해요",
+        "4500개의 필수 단어와",
+        "AI가 생성해주는 예문을 통해",
+        "여러분들들의 영어실력을 키우세요!",
+    ]
+
     return (
         <div className={`${style['learntoday-page']}`}>
             <CommonLeftSidebar user={user}
-                                title={"새 단어 학습"}/>
+                                title={"새 단어 학습"}
+                                desc={sideDesc}/>
             <LearnMain  
                 question={question} 
                 loading={loading} 

@@ -61,10 +61,18 @@ const PageDailyColumn = ({user}) => {
         }
     }
 
+    const sideDesc= [
+        "하루에 하나의 칼럼을 읽어봐요",
+        "7가지의 칼럼주제를 이용하여",
+        "일주일간 하나씩 읽을 수 있어요",
+        "여러분들들의 영어실력을 키우세요!",
+    ]
+
     return (
         <div className={`${style['dailycolumn-page']}`}>
             <CommonLeftSidebar user={user}
-                                title={"하루칼럼"} />
+                                title={"하루칼럼"}
+                                desc={sideDesc}/>
             <DailyColumnMain column={column}
                                 handleTitleBackground = {handleTitleBackground}/>
             <DailyColumnRightSidebar columnInfos = {columnInfos} 

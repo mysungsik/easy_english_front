@@ -41,10 +41,20 @@ const PageRepeatNote = ({user}) =>{
         alert(response.message)
     }
 
+    
+    const sideDesc= [
+        "모르는 단어를 단어장에 담아두세요",
+        "4500개의 필수 단어와",
+        "AI가 생성해주는 예문을 통해",
+        "여러분들들의 영어실력을 키우세요!",
+    ]
+
+
     return (
         <div className={`${style['repeat-note-page']}`}>
             <CommonLeftSidebar user={user}
-                                title={"단어장 확인"} />
+                                title={"단어장 확인"}
+                                desc={sideDesc}/>
             <RepeatNoteMain
                 user={user}
                 type={"repeat-note"}

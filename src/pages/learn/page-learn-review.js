@@ -127,12 +127,18 @@ const PageLearnReview = ({user}) => {
         utilState : {speechHint}
     }
 
-
+    const sideDesc= [
+        "배운곳까지 랜덤으로 복습해요!",
+        "4500개의 필수 단어와",
+        "AI가 생성해주는 예문을 통해",
+        "여러분들들의 영어실력을 키우세요!",
+    ]
 
     return (
         <div className={`${style['learnreview-page']}`}>
             <CommonLeftSidebar user={user}
-                                title={"복습하기"} />
+                                title={"복습하기"}
+                                desc={sideDesc}/>
             <LearnMain  
                 question={question} 
                 loading={loading} 

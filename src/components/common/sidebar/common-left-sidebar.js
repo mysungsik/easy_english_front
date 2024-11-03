@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import style from "./common-left-sidebar.module.css"
 
-const CommonLeftSidebar = ({user, title}) =>{
+const CommonLeftSidebar = ({user, title, desc}) =>{
     const navigate = useNavigate()
     
     const [time, setTime] = useState(0)
@@ -31,10 +31,11 @@ const CommonLeftSidebar = ({user, title}) =>{
                 <div className={`${style['common-side-info-div']} mt-8`}>
                     <p className={`${style['info-title']} fs-header__s fw__b fc__white mt-12`}>{title}</p>
                     <p className={`${style['info-description']} fs__s fc__white mt-12`}>
-                        실생활에서 가장 잘 쓰이는 단어로 공부해요 <br/>
-                        4500개의 필수 단어와 <br/>
-                        AI가 생성해주는 예문을 통해 <br/>
-                        여러분들들의 영어실력을 키우세요! <br/>
+                        {desc.map((item,index)=>(
+                            <React.Fragment key={index}>
+                                { item } <br/>
+                            </React.Fragment>
+                        ))}
                     </p>
                 </div>
                 {/* 로그인 유저 정보 */}
