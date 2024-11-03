@@ -19,7 +19,7 @@
 }
 
 .repeat-note-item .item-top-div.show{
-    height: 145px !important;
+    height: 155px !important;
     transition: ease-out all 0.3s;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import style from "./daily-column-main.module.css"
+import axiosInstance from "../../config/axiosConfig";
 
 const DailyColumnMain = ({column, handleTitleBackground}) =>{
     const [selectedText, setSelectedText] = useState('');
+    const [translatedText, setTranslatedText] = useState('');
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     // 마우스 드래그시 화면에 표시되는 텍스트
@@ -18,6 +20,7 @@ const DailyColumnMain = ({column, handleTitleBackground}) =>{
             });
         } else {
             setSelectedText(''); // 드래그한 값이 없을경우 초기화
+            setTranslatedText('')
         }
     };
 
@@ -44,25 +47,32 @@ const DailyColumnMain = ({column, handleTitleBackground}) =>{
     // 번역 요청
     const translateWithTranslationAI = async () => {
         const searchValue = selectedText
+
+        const response = await axiosInstance.get(`/dailyColumn/getTranslation?text=${searchValue}`);
+        if (response.data === "" || response.data === null){
+            alert(response.message);
+        }else{
+            setTranslatedText(response.data)
+        }
     }
 
     return(
         <section className={`${style['column-main-section']}`}>
-            <p className={`${style['column-info']} fs__l fw__b ${handleTitleBackground(column['topic'])}`}>
-                {column['topic']} / {column['title']}  
+            <p className={`${style['column-info']} fs__l fw__b ${handleTitleBackground(column['columnTopic'])}`}>
+                {column['columnTopic']} / {column['columnTitle']}  
             </p>
             <div className={`${style['column-text-div']}`} onMouseUp={handleMouseUp}>
-                {column.hasOwnProperty("topic") && formatTextToHTML(column['column'])}
+                {column.hasOwnProperty("columnTopic") && formatTextToHTML(column['columnContent'])}
             </div>
             {selectedText && (
-                <div className={`${style['tooltip']} ${handleTitleBackground(column['topic'])} bs__gray`} 
+                <div className={`${style['tooltip']} ${handleTitleBackground(column['columnTopic'])} bs__gray`} 
                      style={{
                         left: tooltipPosition.x,
                         top: tooltipPosition.y,
                     }}
                 >
-                    <p>
-                        {selectedText}
+                    <p className={`${style['tooltip-content']}`}>
+                        {translatedText != '' ? translatedText : selectedText}
                     </p>
                     <button className={`btn-small btn__white`} onClick={translateWithTranslationAI}> 검색 </button>
                 </div>

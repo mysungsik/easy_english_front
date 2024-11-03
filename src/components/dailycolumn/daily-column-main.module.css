@@ -44,6 +44,11 @@
     transform: translate(-50%, -100%); /* Center and adjust tooltip above */
 }
 
+.column-main-section .tooltip .tooltip-content{
+    min-width: 300px;
+    max-width: 600px;
+    white-space: normal;
+}
 .column-main-section button{
     margin-top: 10px;
     width: 50px;
