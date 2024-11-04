@@ -4,8 +4,8 @@ import axios from "axios";
 const jwt = localStorage.getItem("jwt")
 
 const axiosInstance = axios.create({
-    baseURL : process.env.REACT_APP_DEV_SERVER,
-    // baseURL: process.env.REACT_APP_DEPLOY_SERVER,
+    // baseURL : process.env.REACT_APP_DEV_SERVER,
+    baseURL: process.env.REACT_APP_DEPLOY_SERVER,
     timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
