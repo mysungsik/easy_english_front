@@ -5,22 +5,24 @@ import {useNavigate} from "react-router-dom"
 import {idValidation, emailValidation, passwordValidation, nicknameValidation} from "../../util/validation"
 
 const SignupForm = () =>{
-    const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-
+    const [showPassword, setShowPassword] = useState(false)
+    const [dupCheck, setDupCheck] = useState({
+        idDup : false,
+        emailDup : false
+    })
     const [validation, setValidation] = useState({
         idValidate : false,
         pwValidate : false,
         emailValidate : false,
         nicknameValidate : false
     })
-
-const [signupInfo, setSignupInfo] = useState({
-    memberId :"",
-    memberPw :"",
-    memberEmail :"",
-    memberNickname :"",
-})
+    const [signupInfo, setSignupInfo] = useState({
+        memberId :"",
+        memberPw :"",
+        memberEmail :"",
+        memberNickname :"",
+    })
 
     const handlePasswordToggle = ()=>{
         setShowPassword(!showPassword)
@@ -36,29 +38,64 @@ const [signupInfo, setSignupInfo] = useState({
     const handleValidation = () =>{
         setValidation(prevValidation => ({
                 ...prevValidation,
-                idValidate: idValidation(signupInfo.memberId),
+                idValidate: idValidation(signupInfo.memberId) && !dupCheck['idDup'],
                 pwValidate: passwordValidation(signupInfo.memberPw),
-                emailValidate: emailValidation(signupInfo.memberEmail),
+                emailValidate: emailValidation(signupInfo.memberEmail) && !dupCheck['emailDup'],
                 nicknameValidate: nicknameValidation(signupInfo.memberNickname)
             })
         )
     }
-    
-    useEffect(()=>{handleValidation()},[signupInfo])
 
-const signup = async (e) =>{
-    e.preventDefault()
-
-    try {
-        const response = await axiosInstance.post("/signup", signupInfo)
-        console.log(response)
-        if(response > 0){
-            navigate("/login")
+    const handleIdDupCheck = async () =>{
+        try {
+            const response = await axiosInstance.get(`/signup/idDupCheck?memberId=${signupInfo['memberId']}`)
+            
+            if (response.data){
+                setDupCheck((prev)=>({...prev, ['idDup'] : true}))
+            }else{
+                setDupCheck((prev)=>({...prev, ['idDup'] : false}))
+            }
+        } catch (error) {
+            alert("아이디 중복체크에 실패하였습니다.")
         }
-    } catch (error) {
-        alert("회원가입에 실패하였습니다. 정보를 확인해주세요")
     }
-}
+
+    const handleEmailDupCheck = async() =>{
+        try {
+            const response = await axiosInstance.get(`/signup/emailDupCheck?memberEmail=${signupInfo['memberEmail']}`)
+
+            if (response.data){
+                setDupCheck((prev)=>({...prev, ['emailDup'] : true}))
+            }else{
+                setDupCheck((prev)=>({...prev, ['emailDup'] : false}))
+            }
+        } catch (error) {
+            alert("이메일 중복체크에 실패하였습니다.")
+        }
+    }
+    
+    useEffect(() => {
+        handleIdDupCheck();
+        handleEmailDupCheck();
+    }, [signupInfo.memberId, signupInfo.memberEmail]);
+
+    useEffect(() => {
+        handleValidation();
+    }, [dupCheck, signupInfo.memberPw, signupInfo.memberNickname]);
+
+    const signup = async (e) =>{
+        e.preventDefault()
+
+        try {
+            const response = await axiosInstance.post("/signup", signupInfo)
+            console.log(response)
+            if(response > 0){
+                navigate("/login")
+            }
+        } catch (error) {
+            alert("회원가입에 실패하였습니다. 정보를 확인해주세요")
+        }
+    }
 
     return (
         <section className={`${style['signup-form-section']} `}>
@@ -73,7 +110,11 @@ const signup = async (e) =>{
                             name="memberId" 
                             onChange={(e)=>handleUserInput(e)} 
                             placeholder="ID : *소문자를 포함 3~10 글자" />
-                        {validation.idValidate === false && signupInfo.memberId !== ''  ? <p className={`${style['validate-fail']}`}>*아이디 형식이 올바르지 않습니다.</p> : ''}
+                        { dupCheck['idDup'] ? <p className={`${style['validate-fail']}`}>*아이디가 중복되었습니다.</p> 
+                            : validation.idValidate === false && signupInfo.memberId !== ''  
+                                ? <p className={`${style['validate-fail']}`}>*아이디 형식이 올바르지 않습니다.</p> 
+                                : ''
+                        }
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}> 패스워드 </p>
@@ -92,7 +133,10 @@ const signup = async (e) =>{
                     <div>
                         <p className={`${style['signup-subtitle']}`}>이메일</p>
                         <input className={`bs__gray`} type="text" name="memberEmail" onChange={(e)=>handleUserInput(e)}  placeholder="EMAIL : 이메일 형식" />
-                        {validation.emailValidate === false && signupInfo.memberEmail !== ''  ? <p className={`${style['validate-fail']}`}>*이메일 형식이 올바르지 않습니다.</p> : ''}
+                        { dupCheck['emailDup'] ? <p className={`${style['validate-fail']}`}>*이메일이 중복되었습니다.</p> 
+                            : validation.emailValidate === false && signupInfo.memberEmail !== ''  
+                                ? <p className={`${style['validate-fail']}`}>*이메일 형식이 올바르지 않습니다.</p> 
+                                : ''}
                     </div>
                     <div>
                         <p className={`${style['signup-subtitle']}`}>닉네임</p>
